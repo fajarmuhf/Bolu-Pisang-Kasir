@@ -13,8 +13,8 @@
 				$Koneksi = new Hubungi();
 				$Koneksi->Konek("bolu_pisang");
 								
-				$query = "SELECT * FROM `User` WHERE 1 ";
-				$exquery = mysql_query($query);
+				$query = "SELECT * FROM `user` WHERE 1 ";
+				$exquery = mysqli_query($Koneksi->getKonek(),$query);
 				if($exquery){
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
@@ -23,7 +23,7 @@
 					<tr>
 						<td>Id</td><td>Username</td><td>Password</td><td>Status</td><td>Aksi</td>
 					</tr>";
-					while($hasil = mysql_fetch_array($exquery)){
+					while($hasil = mysqli_fetch_array($exquery)){
 						echo "<tr>
 						<td>".$hasil['Id']."</td>
 						<td>".$hasil['Username']."</td>
@@ -44,5 +44,5 @@
 				else{
 					echo "Anda tidak berhasil menampilkan data<br>";
 				}
-				mysql_close($Koneksi->getKonek());
+				mysqli_close($Koneksi->getKonek());
 			?>

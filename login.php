@@ -41,7 +41,7 @@
 				if(@$_GET["Login"] == 1){
 					if(@$_POST["username"] != "" && @$_POST["password"] != ""){
 						$Koneksi = new Hubungi();
-						$Koneksi->Konek("Bolu");
+						$Koneksi->Konek("bolu_pisang");
 							
 						$username = $_POST["username"];
 						$password = $_POST["password"];
@@ -50,10 +50,10 @@
 						$userbaru->setUsername($username);
 						$userbaru->setPassword(md5($password));
 							
-						$query="SELECT COUNT(*),Status FROM User WHERE NoHP = '".$userbaru->getUsername()."' AND Password = '".$userbaru->getPassword()."'";
-						$exquery=mysql_query($query);
+						$query="SELECT COUNT(*),Status FROM User WHERE Username = '".$userbaru->getUsername()."' AND Password = '".$userbaru->getPassword()."'";
+						$exquery=mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
-							$tampil=mysql_fetch_array($exquery);
+							$tampil=mysqli_fetch_array($exquery);
 							if($tampil[0] > 0){
 								$_SESSION["username"]=$_POST["username"];
 								$_SESSION["password"]=md5($_POST["password"]);
