@@ -23,7 +23,7 @@
 				if(@$_GET["kirim"] == 1){
 					if(@$_POST["username"] != "" && @$_POST["password"] != "" && @$_POST["status"] != ""){
 						$Koneksi = new Hubungi();
-						$Koneksi->Konek("penjualan_mobil");
+						$Koneksi->Konek("bolu_pisang");
 								
 						$username = $_POST["username"];
 						$password = $_POST["password"];
@@ -34,15 +34,15 @@
 						$ob1->setPassword($password);
 						$ob1->setStatus($status);
 								
-						$query = "INSERT INTO `User` SELECT (COUNT(*)+1),'".$ob1->getUsername()."','".$ob1->getPassword()."','".$ob1->getStatus()."' FROM `User` WHERE (SELECT COUNT(*) From User WHERE UPPER(Username) = UPPER('".$ob1->getUsername()."')) = 0  ";
-						$exquery = mysql_query($query);
+						$query = "INSERT INTO `User` SELECT (COUNT(*)+1),'".$ob1->getUsername()."','".md5($ob1->getPassword())."','".$ob1->getStatus()."' FROM `User` WHERE (SELECT COUNT(*) From User WHERE UPPER(Username) = UPPER('".$ob1->getUsername()."')) = 0  ";
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
 							echo "Anda telah berhasil menginput data<br>";
 						}
 						else{
 							echo "Anda tidak berhasil menginput data<br>";
 						}
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

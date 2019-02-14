@@ -42,7 +42,7 @@
 					if(@$_POST["username"] != "" && @$_POST["password"] != "" && @$_POST["status"] != "" &&
 					@$_POST["atribut"] != "" && @$_POST["nilai"] != ""){
 						$Koneksi = new Hubungi();
-						$Koneksi->Konek("penjualan_mobil");
+						$Koneksi->Konek("bolu_pisang");
 								
 						$username = $_POST["username"];
 						$password = $_POST["password"];
@@ -56,12 +56,12 @@
 						$ob1->setStatus($status);
 						
 						$query = "SELECT COUNT(*) From User WHERE UPPER($atribut) = UPPER('$nilai')";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){		
-							$hasil = mysql_fetch_array($exquery);
+							$hasil = mysqli_fetch_array($exquery);
 							if($hasil[0] > 0){
-								$query2 = "UPDATE `User` SET Username = '".$ob1->getUsername()."',Password = '".$ob1->getPassword()."',Status = '".$ob1->getStatus()."' WHERE $atribut = '$nilai' ";
-								$exquery2 = mysql_query($query2);
+								$query2 = "UPDATE `User` SET Username = '".$ob1->getUsername()."',Password = '".md5($ob1->getPassword())."',Status = '".$ob1->getStatus()."' WHERE $atribut = '$nilai' ";
+								$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
 								if($exquery2){
 									echo "Anda telah berhasil mengedit data<br>";
 								}
@@ -76,7 +76,7 @@
 						else{
 							echo "Anda tidak berhasil mengedit data<br>";
 						}
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>
