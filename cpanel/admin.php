@@ -3,7 +3,7 @@
 ?>
 <!DOCTYPE HTML>
 <head>
-	<title>Perusahaan Bolu Pisang</title>
+	<title>Perusahaan Jual Beli</title>
 	<link rel="stylesheet" href="../style.css" >
 	<script src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery-ui.js"></script>
@@ -103,7 +103,7 @@
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Bolu Pisang</h2>
+		<h2>Perusahaan Jual Beli</h2>
 	</header>
 	<nav>
 		<ul>

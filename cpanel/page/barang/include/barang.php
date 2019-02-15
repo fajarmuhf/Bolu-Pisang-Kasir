@@ -1,7 +1,7 @@
 <?php
 	class Barang{
 		private $nama;
-		private $tahun;
+		private $harga;
 		private $ket;
 		private $gambar;
 		

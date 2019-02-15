@@ -12,9 +12,7 @@
 		private $koneksi;
 		*/
 		public function Konek($database){
-			$this->koneksi = mysql_connect($this->namaserver,$this->namauser,$this->password);
-			//$database = "u315190910_db";//Public
-			mysql_select_db($database);
+			$this->koneksi = mysqli_connect($this->namaserver,$this->namauser,$this->password,$database);
 		}
 		public function getKonek(){
 			return $this->koneksi;

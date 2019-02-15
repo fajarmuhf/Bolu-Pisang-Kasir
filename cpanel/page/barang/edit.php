@@ -51,16 +51,16 @@
 						$nilai = $_POST["nilai"];
 						
 						$kueh = "SELECT * FROM Barang WHERE $atribut = $nilai";
-						$exkueh = mysql_query($kueh);
+						$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
 						if($exkueh){
-							while($hasil = mysql_fetch_array($exkueh)){
+							while($hasil = mysqli_fetch_array($exkueh)){
 								if ($hasil['Gambar'] != ""){
 									unlink("upload/".$hasil['Gambar']);
 								}
 								$kueh = "SELECT Id FROM `Barang` WHERE $atribut = $nilai ";
-								$exkueh = mysql_query($kueh);
+								$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
 								if($exkueh){
-									$hasilkueh = mysql_fetch_array($exkueh);
+									$hasilkueh = mysqli_fetch_array($exkueh);
 									$nama = $_POST["nama"];
 									$harga = $_POST["harga"];
 									$ket = $_POST["ket"];
@@ -80,7 +80,7 @@
 									 {
 										move_uploaded_file($_FILES["gambar"]["tmp_name"],"upload/" . $mobilbaru->getGambar());							
 										$query = "UPDATE `Barang` SET Nama = '".$mobilbaru->getNama()."',Harga = '".$mobilbaru->getHarga()."',Keterangan = '".$mobilbaru->getKet()."',Gambar = '".$mobilbaru->getGambar()."' WHERE $atribut = '$nilai' ";
-										$exquery = mysql_query($query);
+										$exquery = mysqli_query($Koneksi->getKonek(),$query);
 										if($exquery){
 											echo "Anda telah berhasil mengedit data<br>";
 										}
@@ -94,7 +94,7 @@
 								}
 							}
 						}
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

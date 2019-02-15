@@ -36,11 +36,11 @@
 				$Koneksi->Konek("bolu_pisang");
 								
 				$query2 = "SELECT Id FROM User WHERE Username = '".$_SESSION["username"]."' ";
-				$exquery2 = mysql_query($query2);
+				$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
 				if($exquery2){
-					$res = mysql_fetch_array($exquery2);			
+					$res = mysqli_fetch_array($exquery2);			
 					$query = "SELECT * FROM `Penjualan` WHERE Id_User = '".$res[0]."' AND Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal";
-					$exquery = mysql_query($query);
+					$exquery = mysqli_query($Koneksi->getKonek(),$query);
 					if($exquery){
 						echo "<form action='' id=daftar method=POST >";
 						echo "<input type=hidden id=identitas name=identitas>";
@@ -62,7 +62,7 @@
 						<tr>
 							<td>Id</td><td>Tanggal</td><td>Id Barang</td><td>Jumlah</td><td>Total</td><td>Zakat</td><td>Aksi</td>
 						</tr>";
-						while($hasil = mysql_fetch_array($exquery)){
+						while($hasil = mysqli_fetch_array($exquery)){
 							echo "<tr>
 							<td>".$hasil['Id']."</td>
 							<td>".$hasil['Tanggal']."</td>
@@ -86,5 +86,5 @@
 						echo "Anda tidak berhasil menampilkan data<br>";
 					}
 				}
-				mysql_close($Koneksi->getKonek());
+				mysqli_close($Koneksi->getKonek());
 			?>

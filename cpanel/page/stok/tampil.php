@@ -14,16 +14,16 @@
 				$Koneksi->Konek("bolu_pisang");
 								
 				$query = "SELECT * FROM `Stok` WHERE 1 ";
-				$exquery = mysql_query($query);
+				$exquery = mysqli_query($Koneksi->getKonek(),$query);
 				if($exquery){
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
-					echo "<h3>Data - Data Stok Mobil</h3>";
+					echo "<h3>Data - Data Stok</h3>";
 					echo "<table align=center border=1 class=CSSTableGenerator>
 					<tr>
 						<td>Id</td><td>Id User</td><td>Id Barang</td><td>Jumlah</td><td>Aksi</td>
 					</tr>";
-					while($hasil = mysql_fetch_array($exquery)){
+					while($hasil = mysqli_fetch_array($exquery)){
 						echo "<tr>
 						<td>".$hasil['Id']."</td>
 						<td><a href='?page=user'>".$hasil['Id_User']."</a></td>
@@ -43,5 +43,5 @@
 				else{
 					echo "Anda tidak berhasil menampilkan data<br>";
 				}
-				mysql_close($Koneksi->getKonek());
+				mysqli_close($Koneksi->getKonek());
 			?>

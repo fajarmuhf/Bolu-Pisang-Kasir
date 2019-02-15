@@ -13,10 +13,10 @@
 						$Koneksi->Konek("bolu_pisang");
 						
 						$query = "SELECT * FROM User WHERE 1";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
 							echo "<select name=id_user >";
-							while($hasil = mysql_fetch_array($exquery)){
+							while($hasil = mysqli_fetch_array($exquery)){
 								echo "<option value=".$hasil['Id'].">".$hasil['Id']." - ".$hasil['Username']."</option>";
 							}
 							echo "</select>";
@@ -31,10 +31,10 @@
 				<td>Id Barang : </td><td>
 					<?php
 						$query = "SELECT * FROM Barang WHERE 1";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
 							echo "<select name=id_barang >";
-							while($hasil = mysql_fetch_array($exquery)){
+							while($hasil = mysqli_fetch_array($exquery)){
 								echo "<option value=".$hasil['Id'].">".$hasil['Id']." - ".$hasil['Nama']."</option>";
 							}
 							echo "</select>";
@@ -68,12 +68,12 @@
 						$ob1->setJumlah($jumlah);
 								
 						$query2 = "SELECT COUNT(*) From Stok WHERE UPPER(Id_User) = UPPER('".$ob1->getIduser()."') AND UPPER(Id_Barang) = UPPER('".$ob1->getIdbarang()."')";
-						$exquery2 = mysql_query($query2);
+						$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
 						if($exquery2){
-							$hasil = mysql_fetch_array($exquery2);
+							$hasil = mysqli_fetch_array($exquery2);
 							if($hasil[0] == 0){							
 								$query = "INSERT INTO `Stok` SELECT (COUNT(*)+1),'".$ob1->getIduser()."','".$ob1->getIdbarang()."','".$ob1->getJumlah()."' FROM `Stok` WHERE (SELECT COUNT(*) From Stok WHERE UPPER(Id_Barang) = UPPER('".$ob1->getIdbarang()."') AND UPPER(Id_User) = UPPER('".$ob1->getIduser()."')) = 0";
-								$exquery = mysql_query($query);
+								$exquery = mysqli_query($Koneksi->getKonek(),$query);
 								if($exquery){
 									echo "Anda telah berhasil menginput data<br>";
 								}
@@ -85,7 +85,7 @@
 								echo "Anda tidak berhasil menginput data<br>";
 							}
 						}
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

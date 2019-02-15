@@ -15,7 +15,7 @@
 	$tglakhir = $_GET['tglafter'];
 	
 	$query = "SELECT * FROM Penjualan WHERE Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal ";
-	$exquery = mysql_query($query);
+	$exquery = mysqli_query($koneksi->getKonek(),$query);
 	
 	$sumbux = array();
 	$sumbuy = array();
@@ -24,7 +24,7 @@
 	
 	$i=0;
 	if($exquery){
-		while($hasil = mysql_fetch_array($exquery)){
+		while($hasil = mysqli_fetch_array($exquery)){
 			$sumbux[$i] = $hasil['Tanggal'];
 			$sumbuy[$i] = $hasil['Jumlah'];
 			$sumbuy2[$i] = $hasil['Id_Barang'];
@@ -69,7 +69,7 @@
 	//Mengeset Slice Color 
 	//$garis->SetSliceColors($colorslice);
 	//Membuat Legend untuk garis
-	$garis2->SetLegend('Id_Mobil');
+	$garis2->SetLegend('Id_Barang');
 	
 	$tampil->Add($garis);
 	$tampil->Add($garis2);
@@ -82,6 +82,6 @@
 	
 	}
 	
-	mysql_close($koneksi->getKonek());
+	mysqli_close($koneksi->getKonek());
 	
 ?>

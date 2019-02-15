@@ -20,10 +20,10 @@
 						$Koneksi->Konek("bolu_pisang");
 						
 						$query = "SELECT * FROM User WHERE 1";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
 							echo "<select name=id_user >";
-							while($hasil = mysql_fetch_array($exquery)){
+							while($hasil = mysqli_fetch_array($exquery)){
 								echo "<option value=".$hasil['Id'].">".$hasil['Id']." - ".$hasil['Username']."</option>";
 							}
 							echo "</select>";
@@ -42,10 +42,10 @@
 						$Koneksi->Konek("bolu_pisang");
 						
 						$query = "SELECT * FROM Barang WHERE 1";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
 							echo "<select name=id_barang >";
-							while($hasil = mysql_fetch_array($exquery)){
+							while($hasil = mysqli_fetch_array($exquery)){
 								echo "<option value=".$hasil['Id'].">".$hasil['Id']." - ".$hasil['Nama']."</option>";
 							}
 							echo "</select>";
@@ -86,12 +86,12 @@
 						$ob1->setIdbarang($id_barang);
 						$ob1->setJumlah($jumlah);
 						$query2 = "SELECT Harga FROM Barang WHERE Id = '".$ob1->getIdbarang()."'";
-						$exquery2 = mysql_query($query2);
+						$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
 						if($exquery2){
-							$hasil = mysql_fetch_array($exquery2);
+							$hasil = mysqli_fetch_array($exquery2);
 							$total = ($ob1->getJumlah()*$hasil[0]);
 							$query = "INSERT INTO `Penjualan` SELECT (COUNT(*)+1),'".$ob1->getTanggal()."','".$ob1->getIduser()."','".$ob1->getIdbarang()."','".$ob1->getJumlah()."','".$total."','".($total*2.5/100)."' FROM `Penjualan` WHERE 1 ";
-							$exquery = mysql_query($query);
+							$exquery = mysqli_query($Koneksi->getKonek(),$query);
 							if($exquery){
 								echo "Anda telah berhasil menginput data<br>";
 							}
@@ -99,7 +99,7 @@
 								echo "Anda tidak berhasil menginput data<br>";
 							}
 						}
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

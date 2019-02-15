@@ -17,10 +17,10 @@
 						$Koneksi->Konek("bolu_pisang");
 						
 						$query = "SELECT * FROM Barang WHERE 1";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
 							echo "<select name=id_barang >";
-							while($hasil = mysql_fetch_array($exquery)){
+							while($hasil = mysqli_fetch_array($exquery)){
 								echo "<option value=".$hasil['Id'].">".$hasil['Id']." - ".$hasil['Nama']."</option>";
 							}
 							echo "</select>";
@@ -49,9 +49,9 @@
 								
 						$tanggal = date("Y-m-d H:m:s");
 						$kueh = "SELECT Id FROM User WHERE Username = '".$_SESSION['username']."'";
-						$exkueh = mysql_query($kueh);
+						$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
 						if($exkueh){
-							$res = mysql_fetch_array($exkueh);
+							$res = mysqli_fetch_array($exkueh);
 							$id_user = $res[0];
 							$id_barang = $_POST["id_barang"];
 							$jumlah = $_POST["jumlah"];
@@ -63,21 +63,21 @@
 							$ob1->setJumlah($jumlah);
 							
 							$query3 = "SELECT Jumlah FROM Stok WHERE Id_User = '".$ob1->getIduser()."' AND Id_Barang = '".$ob1->getIdbarang()."' ";
-							$exquery3 = mysql_query($query3);
+							$exquery3 = mysqli_query($Koneksi->getKonek(),$query3);
 							if($exquery3){
-								$result = mysql_fetch_array($exquery3);
+								$result = mysqli_fetch_array($exquery3);
 								if(($result[0]-($ob1->getJumlah())) >= 0 ){
 									$juman = ($result[0]-($ob1->getJumlah()));
 									$query4 = "UPDATE Stok SET Jumlah = '".$juman."' WHERE Id_User = '".$ob1->getIduser()."' AND Id_Barang = '".$ob1->getIdbarang()."' ";
-									$exquery4 = mysql_query($query4);
+									$exquery4 = mysqli_query($Koneksi->getKonek(),$query4);
 									if($exquery4){
 										$query2 = "SELECT Harga FROM Barang WHERE Id = '".$ob1->getIdbarang()."'";
-										$exquery2 = mysql_query($query2);
+										$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
 										if($exquery2){
-											$hasil = mysql_fetch_array($exquery2);
+											$hasil = mysqli_fetch_array($exquery2);
 											$total = ($ob1->getJumlah()*$hasil[0]);
 											$query = "INSERT INTO `Penjualan` SELECT (COUNT(*)+1),'".$ob1->getTanggal()."','".$ob1->getIduser()."','".$ob1->getIdbarang()."','".$ob1->getJumlah()."','".$total."','".($total*2.5/100)."' FROM `Penjualan` WHERE 1 ";
-											$exquery = mysql_query($query);
+											$exquery = mysqli_query($Koneksi->getKonek(),$query);
 											if($exquery){
 												echo "Anda telah berhasil menginput data<br>";
 											}
@@ -98,7 +98,7 @@
 								echo "Anda tidak berhasil menginput data<br>";
 							}
 						}
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

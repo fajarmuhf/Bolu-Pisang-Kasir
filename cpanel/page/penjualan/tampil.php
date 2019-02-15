@@ -34,12 +34,18 @@
 				
 				$_SESSION['tglbefore'] = $tglawal;
 				$_SESSION['tglafter'] = $tglakhir;
+				if(@$_GET['c'] == ""){
+					$_GET['c'] = 1;
+				}
 				
 				$Koneksi = new Hubungi();
 				$Koneksi->Konek("bolu_pisang");
+				
+				$pembagi = 5;
+				$pembagi2 = 2;
 								
-				$query = "SELECT * FROM `Penjualan` WHERE Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal ";
-				$exquery = mysql_query($query);
+				$query = "SELECT * FROM `Penjualan` WHERE Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal DESC LIMIT ".(($_GET['c']-1)*2).",$pembagi";
+				$exquery = mysqli_query($Koneksi->getKonek(),$query);
 				if($exquery){
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
@@ -64,7 +70,7 @@
 					$kumpulJumlah = 0;
 					$kumpulTotal = 0;
 					//$kumpulZakat = 0;
-					while($hasil = mysql_fetch_array($exquery)){
+					while($hasil = mysqli_fetch_array($exquery)){
 						echo "<tr>
 						<td>".$hasil['Id']."</td>
 						<td>".$hasil['Tanggal']."</td>
@@ -95,9 +101,26 @@
 					</tr>";
 					echo "</table></div>";
 					echo "</form>";
+					$query0 = "SELECT COUNT(Id) FROM `Penjualan` WHERE Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal ";
+					$exquery0 = mysqli_query($Koneksi->getKonek(),$query0);
+					if($exquery0){
+						$berhasil = mysqli_fetch_array($exquery0);
+						if($berhasil[0]%$pembagi == 0){
+							for($i=0;$i<($berhasil[0]/$pembagi);$i++){
+								echo "<a href=?page=penjualan&i=tampil&c=".($i+1).">".($i+1)."</a>";
+							}
+						}
+						else{
+							for($i=0;$i<(($berhasil[0]-($berhasil[0]%$pembagi))/$pembagi)+1;$i++){
+								echo "<a href=?page=penjualan&i=tampil&c=".($i+1).">".($i+1)."&nbsp;</a>";
+							}
+							
+						}
+					}
+					
 				}
 				else{
 					echo "Anda tidak berhasil menampilkan data<br>";
 				}
-				mysql_close($Koneksi->getKonek());
+				mysqli_close($Koneksi->getKonek());
 			?>

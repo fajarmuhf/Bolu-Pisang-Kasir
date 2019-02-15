@@ -38,24 +38,24 @@
 						$nilai = $_POST["nilai"];
 								
 						$query = "SELECT COUNT(*) FROM Stok WHERE 1 ";
-						$exquery = mysql_query($query);
+						$exquery = mysqli_query($Koneksi->getKonek(),$query);
 						if($exquery){
-							$hasil = mysql_fetch_array($exquery);
+							$hasil = mysqli_fetch_array($exquery);
 							if($hasil[0] > 0){
 								$query2 = "SELECT * FROM Stok WHERE $atribut = '$nilai'";
-								$exquery2 = mysql_query($query2);
+								$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
 								if($exquery2){
 									$kueh = "DELETE FROM `Stok` WHERE $atribut = '$nilai' ";
-									$exkueh = mysql_query($kueh);
+									$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
 									if($exkueh){
-										while($hasil2 = mysql_fetch_array($exquery2)){
+										while($hasil2 = mysqli_fetch_array($exquery2)){
 											$query3 = "SELECT COUNT(*) FROM Stok WHERE Id > ".$hasil2['Id'];
-											$exquery3 = mysql_query($query3);
+											$exquery3 = mysqli_query($Koneksi->getKonek(),$query3);
 											if($exquery3){
-												$hitung = mysql_fetch_array($exquery3);
+												$hitung = mysqli_fetch_array($exquery3);
 												if($hitung[0] > 0){
 													$query4 = "UPDATE Stok SET Id = (Id-1) WHERE Id > ".$hasil2['Id'];
-													$exquery4 = mysql_query($query4);
+													$exquery4 = mysqli_query($Koneksi->getKonek(),$query4);
 													if($exquery4){
 														echo "Anda telah berhasil menghapus data<br>";
 													}
@@ -85,7 +85,7 @@
 							echo "Anda tidak berhasil menghapus data<br>";
 						}
 						
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

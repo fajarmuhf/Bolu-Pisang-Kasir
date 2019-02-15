@@ -28,9 +28,9 @@
 						$Koneksi = new Hubungi();
 						$Koneksi->Konek("bolu_pisang");
 						$kueh = "SELECT (COUNT(*)+1) FROM `Barang` WHERE 1 ";
-						$exkueh = mysql_query($kueh);
+						$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
 						if($exkueh){
-							$hasilkueh = mysql_fetch_array($exkueh);
+							$hasilkueh = mysqli_fetch_array($exkueh);
 							$nama = $_POST["nama"];
 							$harga = $_POST["harga"];
 							$ket = $_POST["ket"];
@@ -50,7 +50,7 @@
 							 {
 								move_uploaded_file($_FILES["gambar"]["tmp_name"],"upload/" . $barangbaru->getGambar());							
 								$query = "INSERT INTO `Barang` SELECT (COUNT(*)+1),'".$barangbaru->getNama()."','".$barangbaru->getHarga()."','".$barangbaru->getKet()."','".$barangbaru->getGambar()."' FROM `Barang` WHERE 1 ";
-								$exquery = mysql_query($query);
+								$exquery = mysqli_query($Koneksi->getKonek(),$query);
 								if($exquery){
 									echo "Anda telah berhasil menginput data<br>";
 								}
@@ -62,7 +62,7 @@
 						else{
 							echo "Anda tidak berhasil menginput data<br>";
 						}			
-						mysql_close($Koneksi->getKonek());
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

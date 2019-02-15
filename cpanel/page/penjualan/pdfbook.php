@@ -35,11 +35,11 @@
 	$tglakhir = str_replace('/',':',$_GET['tglafter']);
 	
 	$query = "SELECT * FROM Penjualan WHERE Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal ";
-	$exquery = mysql_query($query);
+	$exquery = mysqli_query($Koneksi->getKonek(),$query);
 	
 	if($exquery){
 		$tulis = "";
-		while($hasil = mysql_fetch_array($exquery)){
+		while($hasil = mysqli_fetch_array($exquery)){
 			$tulis .= $hasil['Id'].";";
 			$tulis .= $hasil['Tanggal'].";";
 			$tulis .= $hasil['Id_User'].";";
