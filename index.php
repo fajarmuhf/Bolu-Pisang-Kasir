@@ -8,7 +8,7 @@
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Bolu Pisang</h2>
+		<h2>Perusahaan Goblok</h2>
 	</header>
 	<nav>
 		<ul>
