@@ -264,7 +264,7 @@
 				$this->SetTextColor(255);
 				$this->SetDrawColor(128,0,0);
 				$this->SetLineWidth(.3);
-				$this->SetFont('','B');
+				$this->SetFont('Courier','B',5);
 				// Header
 				$w = array();
 				for($i=0;$i<count($header);$i++)
@@ -289,9 +289,21 @@
 					else{
 						$this->SetFillColor(224,235,255);
 					}
-					$this->SetFont('Courier','B',7);
 					for($i=0;$i<count($header);$i++)
-					$this->Cell($w[$i],36,$row[$i],'LR',0,'L',$fill);
+					{
+						if(strlen($row[$i]) > 0){
+							if(3*15/strlen($row[$i]) < 20){
+								$this->SetFont('Courier','B',8*9/strlen($row[$i]));
+							}
+							else{
+								$this->SetFont('Courier','B',20);	
+							}
+						}
+						else{
+							$this->SetFont('Courier','B',5);	
+						}
+						$this->Cell($w[$i],36,$row[$i],'LR',0,'L',$fill);
+					}
 					$this->Ln();
 					//$fill = !$fill;
 					$lo++;

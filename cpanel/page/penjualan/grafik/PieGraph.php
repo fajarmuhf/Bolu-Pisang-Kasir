@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	//memanggil library
 	include("../../../../jpgraph/src/jpgraph.php");
 	include("../../../../jpgraph/src/jpgraph_pie.php");
@@ -7,27 +8,50 @@
 	//membuat data untuk ditampilkan pada sumbu X
 	include "../include/koneksi.php";
 	
-	$koneksi = new Hubungi();
-	$koneksi->Konek("bolu_pisang");
+	$Koneksi = new Hubungi();
+	$Koneksi->Konek("fandystore");
 	
-	$tglawal = $_GET['tglbefore'];
-	$tglakhir = $_GET['tglafter'];
-	
-	$query = "SELECT * FROM Penjualan WHERE Tanggal >= '$tglawal' AND Tanggal <= '$tglakhir' ORDER BY Tanggal ";
-	$exquery = mysqli_query($koneksi->getKonek(),$query);
-	
+	$tglawal = $_SESSION['tglbefore'];
+	$tglakhir = $_SESSION['tglafter'];
+
+	$query = "SELECT * FROM `clientorder` WHERE updateorder >= '$tglawal' AND updateorder <= '$tglakhir' ORDER BY updateorder ASC ";
+	$exquery=$Koneksi->getKonek()->prepare($query);
+	$result = $exquery->execute();
+	if($result){
+		$hasil=$exquery->get_result()->fetch_all(MYSQLI_ASSOC);
+	}
+
 	$sumbux = array();
 	$sumbuy = array();
-	$sumbuy2 = array();
 	
 	
-	$i=0;
+	$n=0;
 	if($exquery){
-		while($hasil = mysqli_fetch_array($exquery)){
-			$sumbux[$i] = $hasil['Tanggal'];
-			$sumbuy[$i] = $hasil['Jumlah'];
-			$sumbuy2[$i] = $hasil['Id_Barang'];
-			$i++;
+		for($i=0;$i<count($hasil);$i++){
+			$idorder = $hasil[$i]["id"];
+				
+			$query3 = "SELECT * FROM `cart` WHERE orderid = ?";
+			$exquery3=$Koneksi->getKonek()->prepare($query3);
+			$exquery3->bind_param("i",$idorder);
+			$result3 = $exquery3->execute();
+			if($result3){
+				$hasil3=$exquery3->get_result()->fetch_all(MYSQLI_ASSOC);
+				$totalbayar = 0;
+				for($j=0;$j<count($hasil3);$j++){
+					$item_id = $hasil3[$j]["itemid"];
+					$query2 = "SELECT * FROM `produk` WHERE id = $item_id";
+					$exquery2 = mysqli_query($Koneksi->getKonek(),$query2);
+					if($exquery2){
+						$hasil2 = mysqli_fetch_array($exquery2);
+						$barang_harga = $hasil2['harga'];
+						$total_barang = $hasil3[$j]["jumlah"]*$barang_harga;
+						$totalbayar += $total_barang;
+					}
+				}
+			}
+			$sumbux[$n] = $hasil[$i]['updateorder'];
+			$sumbuy[$n] = $totalbayar;
+			$n++;
 		}
 	//Slice Color
 	$colorslice = array('#1E90FF','#2E8B57','#ADFF2F','#BA55D3');
@@ -49,6 +73,9 @@
 	$tampil->xaxis->SetTickLabels($sumbux);
 	//Mengeset Warna
 	$tampil->xgrid->SetColor('white');
+	$tampil->xaxis->SetFont(FF_VERDANA,FS_NORMAL,7);
+	$tampil->xaxis->SetLabelAngle(50);
+	$tampil->yaxis->SetFont(FF_VERDANA,FS_NORMAL,5);
 	
 	//Mengeplot Grafik
 	$garis = new PiePlot($sumbuy);
@@ -61,14 +88,6 @@
 	//$garis->SetLegend('Harga');
 	
 	//Mengeplot Grafik
-	$garis2 = new PiePlot($sumbuy2);
-	//Menambahkan plot ke dalam grafik dengan cara menambahkan object garis ke dalam object tampil
-	//Mengeset warna untuk sumbu y
-	$garis2->SetColor("blue");
-	//Mengeset Slice Color 
-	$garis->SetSliceColors($colorslice);
-	//Membuat Legend untuk garis
-	//$garis2->SetLegend('Tahun');
 	
 	$tampil->Add($garis);
 	//$tampil->Add($garis2);
@@ -81,6 +100,6 @@
 	
 	}
 	
-	mysqli_close($koneksi->getKonek());
+	mysql_close($koneksi->getKonek());
 	
 ?>

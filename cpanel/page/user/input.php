@@ -1,4 +1,7 @@
-		<form action="?page=user&i=input&kirim=1" method="post">
+		<?php
+			include "page/secure.php";
+		?>
+		<form action="?page=user&i=input&kirim=1" method="post" enctype="multipart/form-data">
 			<table align=center class=Login>
 			<tr>
 				<td colspan=2>Input</td>
@@ -7,41 +10,63 @@
 				<td>Username : </td><td><input type="text" name="username" id="username"></td>
 			</tr>
 			<tr>
-				<td>Password : </td><td><input type="text" name="password" id="password"></td>
+				<td>Password : </td><td><input type="password" name="password" id="password"></td>
 			</tr>
 			<tr>
-				<td>Status : </td><td><input type="text" name="status" id="status"></td>
+				<td>Status : </td><td><select name="status" id="status">
+					<option value="admin">admin</option>
+					<option value="manager">manager</option>
+					<option value="kasir">kasir</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Perumahan : </td><td><select name="perum" id="perum">
+					<?php
+						$Koneksi->Konek("fandystore");
+						$kueh = "SELECT * FROM `perumahan` WHERE 1 ";
+						$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
+						if($exkueh){
+							while($hasilkueh = mysqli_fetch_array($exkueh)){
+								$perumahan = $hasilkueh["nama"];
+								echo "<option value='$perumahan'>$perumahan</option>";
+							}
+						}
+					?>
+				</select></td>
 			</tr>
 			<tr>
 				<td colspan=2><button class="button"> Tambah </button></td>
 			</tr>
 			</table>
 			<?php
-				include "include/koneksi.php";
 				include "include/user.php";
-			
+				
 				if(@$_GET["kirim"] == 1){
-					if(@$_POST["username"] != "" && @$_POST["password"] != "" && @$_POST["status"] != ""){
-						$Koneksi = new Hubungi();
-						$Koneksi->Konek("bolu_pisang");
+					if(@$_POST["username"] != "" && @$_POST["password"] != "" && @$_POST["status"] != "" && @$_POST["perum"] != ""){
+						$kueh = "SELECT (COUNT(*)+1) FROM `user-manager` WHERE 1 ";
+						$exkueh = mysqli_query($Koneksi->getKonek(),$kueh);
+						if($exkueh){
+							$hasilkueh = mysqli_fetch_array($exkueh);
+							$username = $_POST["username"];
+							$password = md5($_POST["password"]);
+							$status = $_POST["status"];
+							$perum = $_POST["perum"];
 								
-						$username = $_POST["username"];
-						$password = $_POST["password"];
-						$status = $_POST["status"];
-								
-						$ob1 = new User();
-						$ob1->setUsername($username);
-						$ob1->setPassword($password);
-						$ob1->setStatus($status);
-								
-						$query = "INSERT INTO `User` SELECT (COUNT(*)+1),'".$ob1->getUsername()."','".md5($ob1->getPassword())."','".$ob1->getStatus()."' FROM `User` WHERE (SELECT COUNT(*) From User WHERE UPPER(Username) = UPPER('".$ob1->getUsername()."')) = 0  ";
-						$exquery = mysqli_query($Koneksi->getKonek(),$query);
-						if($exquery){
-							echo "Anda telah berhasil menginput data<br>";
+							$query = "INSERT INTO `user-manager` SELECT (COUNT(*)+1),?,?,?,? FROM `user-manager` WHERE 1 ";
+							$exquery=$Koneksi->getKonek()->prepare($query);
+							$exquery->bind_param("ssss",$username,$password,$status,$perum);
+							$result = $exquery->execute();
+							if($result){
+								echo "Anda telah berhasil menginput data<br>";
+							}
+							else{
+								echo "Anda tidak berhasil menginput data<br>";
+							}
+							 
 						}
 						else{
 							echo "Anda tidak berhasil menginput data<br>";
-						}
+						}			
 						mysqli_close($Koneksi->getKonek());
 					}
 				}

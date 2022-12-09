@@ -1,14 +1,26 @@
 <?php
 	session_start();
+	if(isset($_SESSION["username"]) && isset($_SESSION['password']) && isset($_SESSION['status'])){
+		if($_SESSION['status'] == 'admin'){
+			echo "<script>window.location='cpanel/admin.php'</script>";
+		}
+		else if($_SESSION['status'] == 'user'){
+			echo "<script>window.location='cpanel/user.php'</script>";
+		}
+	}
 ?>
 <!DOCTYPE HTML>
 <head>
-	<title>Perusahaan Bolu Pisang</title>
+	<title><?php 
+				include "include/koneksi.php";
+				$Koneksi = new Hubungi();
+				echo $Koneksi->getJudul();
+			?></title>
 	<link rel="stylesheet" href="style.css" >
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Bolu Pisang</h2>
+		<h2><?php echo $Koneksi->getJudul(); ?></h2>
 	</header>
 	<nav>
 		<ul>
@@ -35,33 +47,34 @@
 			</tr>
 			</table>
 			<?php
-				include "include/koneksi.php";
 				include "include/user.php";
 				
 				if(@$_GET["Login"] == 1){
 					if(@$_POST["username"] != "" && @$_POST["password"] != ""){
-						$Koneksi = new Hubungi();
-						$Koneksi->Konek("bolu_pisang");
+						$Koneksi->Konek("fandystore");
 							
 						$username = $_POST["username"];
-						$password = $_POST["password"];
+						$password = md5($_POST["password"]);
 							
 						$userbaru = new User();
 						$userbaru->setUsername($username);
 						$userbaru->setPassword(md5($password));
 							
-						$query="SELECT COUNT(*),Status FROM User WHERE Username = '".$userbaru->getUsername()."' AND Password = '".$userbaru->getPassword()."'";
-						$exquery=mysqli_query($Koneksi->getKonek(),$query);
+						$query="SELECT COUNT(*),Status FROM `user-manager` WHERE Username = ? AND Password = ?";
+						$exquery=$Koneksi->getKonek()->prepare($query);
+						$exquery->bind_param("ss",$username,$password);
+						$exquery->execute();
 						if($exquery){
-							$tampil=mysqli_fetch_array($exquery);
-							if($tampil[0] > 0){
+							$tampil=$exquery->get_result()->fetch_all(MYSQLI_ASSOC);
+							if($tampil[0]['COUNT(*)'] > 0){
 								$_SESSION["username"]=$_POST["username"];
 								$_SESSION["password"]=md5($_POST["password"]);
-								if($tampil[1] == 'admin'){
+								$_SESSION["status"]=$tampil[0]['Status'];
+								if($tampil[0]['Status'] == 'admin'){
 									echo "<script>window.location='cpanel/admin.php'</script>";
 								}
-								else if($tampil[1] == 'user'){
-									echo "<script>window.location='cpanel/user.php'</script>";
+								else if($tampil[0]['Status'] == 'kasir'){
+									echo "<script>window.location='cpanel/kasir.php'</script>";
 								}
 							}
 							else{
@@ -71,6 +84,7 @@
 						else{
 							echo "Maaf Username atau Password salah";
 						}
+						$exquery->close();
 					}
 					else{
 						echo "Data disi terlebih dahulu";

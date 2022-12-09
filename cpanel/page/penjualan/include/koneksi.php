@@ -4,6 +4,7 @@
 		private $namaserver = "localhost";//127.0.0.1
 		private $namauser = "root";
 		private $password = "";
+		private $judul = "Fandy Store";
 		private $koneksi;
 		//Public
 		/*private $namaserver = "mysql.3owl.com:3306";//127.0.0.1
@@ -17,6 +18,9 @@
 		}
 		public function getKonek(){
 			return $this->koneksi;
+		}
+		public function getJudul(){
+			return $this->judul;
 		}
 	}
 ?>

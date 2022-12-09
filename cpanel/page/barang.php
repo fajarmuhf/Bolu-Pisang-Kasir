@@ -1,11 +1,9 @@
 <div id="sidebar">
 	<ul>
-		<li class="geser"><a href="?page=barang&i=input">Input</a></li>
-		<li class="geser"><a href="?page=barang&i=edit">Edit</a></li>
-		<li class="geser"><a href="?page=barang&i=delete">Delete</a></li>
-		<li class="geser"><a href="?page=barang&i=tampil">Tampil</a></li>
-		<li class="geser"><a href="?page=barang&i=grafik">Grafik</a></li>
-		<li class="geser"><a href="?page=barang&i=pdf">PDF</a></li>
+		<li class="geser"><a href="?page=barang&i=input">Tambah</a></li>
+		<?php
+			include "barang/inputsearch.php";
+		?>
 	</ul>
 </div>
 <div id="content">
@@ -15,6 +13,9 @@
 		}
 		else if(@$_GET["i"] == "edit"){
 			include "barang/edit.php";
+		}
+		else if(@$_GET["i"] == "salin"){
+			include "barang/salin.php";
 		}
 		else if(@$_GET["i"] == "delete"){
 			include "barang/delete.php";

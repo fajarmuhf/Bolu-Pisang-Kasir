@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
 <head>
-	<title>Perusahaan Bolu Pisang</title>
+	<title><?php 
+				include "include/koneksi.php";
+				$Koneksi = new Hubungi();
+				echo $Koneksi->getJudul();
+			?></title>
 	<link rel="stylesheet" href="style.css" >
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Bolu Pisang</h2>
-	</header>
+		<h2><?php echo $Koneksi->getJudul(); ?></h2>
 	<nav>
 		<ul>
 			<li class="puter"><a href="index.php">Home</a></li>

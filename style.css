@@ -466,3 +466,7 @@ to { -o-transform: rotate(0deg) scale(0.907) skew(-1deg) translate(0px); }
 a{
 	text-decoration:none;
 }
+.pencarian{
+	width: 80%;
+	margin-bottom:12px;
+}

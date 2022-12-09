@@ -1,11 +1,6 @@
 <div id="sidebar">
 	<ul>
-		<li class="geser"><a href="?page=user&i=input">Input</a></li>
-		<li class="geser"><a href="?page=user&i=edit">Edit</a></li>
-		<li class="geser"><a href="?page=user&i=delete">Delete</a></li>
-		<li class="geser"><a href="?page=user&i=tampil">Tampil</a></li>
-		<li class="geser"><a href="?page=user&i=grafik">Grafik</a></li>
-		<li class="geser"><a href="?page=user&i=pdf">PDF</a></li>
+		<li class="geser"><a href="?page=user&i=input">Tambah</a></li>
 	</ul>
 </div>
 <div id="content">

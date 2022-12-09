@@ -1,9 +1,15 @@
 <?php
 	session_start();
+
+	include "page/secure.php";
 ?>
 <!DOCTYPE HTML>
 <head>
-	<title>Perusahaan Jual Beli</title>
+	<title><?php 
+				include "../include/koneksi.php";
+				$Koneksi = new Hubungi();
+				echo $Koneksi->getJudul();
+			?></title>
 	<link rel="stylesheet" href="../style.css" >
 	<script src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery-ui.js"></script>
@@ -103,19 +109,20 @@
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Jual Beli</h2>
+		<h2><?php
+				echo $Koneksi->getJudul();
+		?></h2>
 	</header>
 	<nav>
 		<ul>
-			<li class="puter"><a href="logout.php" >Logout</a></li>
-			<li class="puter"><a href="?page=barang">Barang Produksi</a></li>
-			<li class="puter"><a href="?page=mentah">Barang Mentah</a></li>
-			<li class="puter"><a href="?page=stok" >Stok</a></li>
-			<li class="puter"><a href="?page=penjualan">Penjualan</a></li>
-			<li class="puter"><a href="?page=pengiriman">Pengiriman</a></li>
-			<li class="puter"><a href="?page=pengeluaran">Pengeluaran</a></li>
+			<li ><a href="logout.php" >Logout</a></li>
+			<li ><a href="?page=penjualan">Keranjang</a></li>
+			<li ><a href="?page=barang">Barang</a></li>
+			<li ><a href="?page=perumahan">Perumahan</a></li>
+			<li ><a href="?page=user" >User</a></li>
+			<!--<li class="puter"><a href="?page=pengeluaran">Pengeluaran</a></li>
 			<li class="puter"><a href="?page=keuntungan">Keuntungan</a></li>
-			<li class="puter"><a href="?page=user">User</a></li>
+			<li class="puter"><a href="?page=user">User</a></li>-->
 		</ul>
 	</nav>
 	<article>
@@ -126,8 +133,8 @@
 			else if(@$_GET["page"] == "penjualan"){
 				include "page/penjualan.php";
 			}
-			else if(@$_GET["page"] == "stok"){
-				include "page/stok.php";
+			else if(@$_GET["page"] == "perumahan"){
+				include "page/perumahan.php";
 			}
 			else if(@$_GET["page"] == "pengiriman"){
 				include "page/pengiriman.php";

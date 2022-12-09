@@ -1,6 +1,21 @@
+<?php
+	session_start();
+	if(isset($_SESSION["username"]) && isset($_SESSION['password']) && isset($_SESSION['status'])){
+		if($_SESSION['status'] == 'admin'){
+			echo "<script>window.location='cpanel/admin.php'</script>";
+		}
+		else if($_SESSION['status'] == 'user'){
+			echo "<script>window.location='cpanel/user.php'</script>";
+		}
+	}
+?>
 <!DOCTYPE HTML>
 <head>
-	<title>Perusahaan Jual Beli</title>
+	<title><?php 
+				include "include/koneksi.php";
+				$Koneksi = new Hubungi();
+				echo $Koneksi->getJudul();
+			?></title>
 	<script src="js/jquery-1.9.1.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<link rel="stylesheet" href="style.css" >
@@ -8,7 +23,7 @@
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Jual Beli</h2>
+		<h2><?php echo $Koneksi->getJudul(); ?></h2>
 	</header>
 	<nav>
 		<ul>

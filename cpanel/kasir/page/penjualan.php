@@ -1,7 +1,6 @@
 <div id="sidebar">
 	<ul>
-		<li class="geser"><a href="?page=penjualan&i=input">Input</a></li>
-		<li class="geser"><a href="?page=penjualan&i=tampil">Tampil</a></li>
+		<li class="geser"><a href="?page=penjualan&i=input">Tambah Barang</a></li>
 	</ul>
 </div>
 <div id="content">

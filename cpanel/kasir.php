@@ -108,29 +108,25 @@
 	<nav>
 		<ul>
 			<li class="puter"><a href="logout.php">Logout</a></li>
-			<li class="puter"><a href="?page=stok">Stok</a></li>
-			<li class="puter"><a href="?page=barang">Barang</a></li>
-			<li class="puter"><a href="?page=penjualan">Penjualan</a></li>
-			<li class="puter"><a href="?page=pengiriman">Pengiriman</a></li>
-			<li class="puter"><a href="?page=user">User</a></li>
+			<li class="puter"><a href="?page=penjualan">Keranjang</a></li>
 		</ul>
 	</nav>
 	<article>
 		<?php
 			if(@$_GET["page"] == "stok"){
-				include "user/page/stok.php";
+				include "kasir/page/stok.php";
 			}
 			else if(@$_GET["page"] == "barang"){
-				include "user/page/barang.php";
+				include "kasir/page/barang.php";
 			}
 			else if(@$_GET["page"] == "penjualan"){
-				include "user/page/penjualan.php";
+				include "kasir/page/penjualan.php";
 			}
 			else if(@$_GET["page"] == "pengiriman"){
-				include "user/page/pengiriman.php";
+				include "kasir/page/pengiriman.php";
 			}
 			else if(@$_GET["page"] == "user"){
-				include "user/page/user.php";
+				include "kasir/page/user.php";
 			}
 			else{
 				echo "<p class=about>Welcome , ".$_SESSION["username"]."</p>";
