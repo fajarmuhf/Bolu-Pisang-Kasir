@@ -65,9 +65,4 @@
 	$fpdf->Cell(0,30,'Dibuat Oleh');
 	$fpdf->SetMargins(410,3,3);
 	$fpdf->ln(50.5);
-	$fpdf->Cell(0,30,'Fajar Muhammad F');
-	
-	include "grafikpdf.php";
-
-	$fpdf->Output();
-?>
+	$fpdf->Cell(0,30,'Faj

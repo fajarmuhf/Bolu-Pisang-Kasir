@@ -97,8 +97,8 @@
 					$tglakhir = $tglakhir.":00";	
 				}
 				else{
-					$tglawal = date("Y-m-1 00:00:00");
-					$tglakhir = date("Y-m-d H:i:s");
+					$tglawal = date("Y-m-1 H:m:s");
+					$tglakhir = date("Y-m-d H:m:s");
 				}
 
 				$_SESSION['tglbefore'] = $tglawal;
