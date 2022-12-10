@@ -12,6 +12,12 @@ Fandy Store Web adalah aplikasi laporan dan kasir sembako berbasis website.
 - RAM : 8 GB
 - Game Engine : Unity 2021.3.8f1 LTS
 
+## Progress Proyek
+
+To Do | Status | Tanggal Selesai | Referensi | Preview
+:---: | :---: | :---: | :---: |  :---: 
+Membuat aplikasi kasir | Done | Jumat,9 Desember 2022 | - | -ResearchBlueprint)
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
