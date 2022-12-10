@@ -17,6 +17,7 @@ Fandy Store Web adalah aplikasi laporan dan kasir sembako berbasis website.
 To Do | Status | Tanggal Selesai | Referensi | Preview
 :---: | :---: | :---: | :---: |  :---: 
 Membuat aplikasi kasir | Done | Jumat,9 Desember 2022 | - | -
+Membuat laporan keuntungan ,modal dan Omset | Done | Jumat,9 Desember 2022 | - | -
 
 ## License
 
