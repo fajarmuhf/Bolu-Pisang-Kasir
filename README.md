@@ -16,9 +16,13 @@ Fandy Store Web adalah aplikasi laporan dan kasir sembako berbasis website.
 
 To Do | Status | Tanggal Selesai | Referensi | Preview
 :---: | :---: | :---: | :---: |  :---: 
+Membuat CRUD Barang | Done | Jumat,3 Desember 2022 | - | -
+Membuat CRUD Perumahan | Done | Sabtu,4 Desember 2022 | - | -
+Membuat CRUD User | Done | Minggu,5 Desember 2022 | - | -
+Membuat CRUD Keranjang | Done | Kamis,8 Desember 2022 | - | -
 Membuat aplikasi kasir | Done | Jumat,9 Desember 2022 | - | -
 Membuat laporan keuntungan ,modal dan Omset | Done | Jumat,9 Desember 2022 | - | -
-Membuat grafik keuntungan ,modal dan Omset | Not Yet | - | - | -
+Membuat CRUD Driver | Done | Minggu,11 Desember 2022 | - | -
 
 ## License
 

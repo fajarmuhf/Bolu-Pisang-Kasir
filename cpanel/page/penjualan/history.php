@@ -97,8 +97,8 @@
 					$tglakhir = $tglakhir.":00";	
 				}
 				else{
-					$tglawal = date("Y-m-1 H:m:s");
-					$tglakhir = date("Y-m-d H:m:s");
+					$tglawal = date("Y-m-1 00:00:00");
+					$tglakhir = date("Y-m-d H:i:s");
 				}
 
 				$_SESSION['tglbefore'] = $tglawal;
@@ -167,7 +167,7 @@
 				function search(){
 					load_flag=0;
 					key=document.getElementById('pencarian').value;
-					jQuery('#tabelku').html('<tr><td>Id</td><td style="width:15%;">Tanggal</td><td>Pelangan/Kasir</td><td>Driver</td><td style="width:35%;">Rincian Barang</td><td>Alamat</td><td>Status</td><td>Aksi</td></tr>');
+					jQuery('#tabels').html('');
 					loadMore(load_flag,key);
 				}
 				var load_flag=0;

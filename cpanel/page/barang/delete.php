@@ -57,10 +57,8 @@
 											$exquery3 = $exquery32->execute();
 											if($exquery3){
 												$totalid = $hasil[0]["COUNT(*)"]+1;
-												$query4 = "ALTER TABLE produk AUTO_INCREMENT=?";
-												$exquery42=$Koneksi->getKonek()->prepare($query4);
-												$exquery42->bind_param("i",$totalid);
-												$exquery4 = $exquery42->execute();
+												$reset = "ALTER TABLE produk AUTO_INCREMENT = $totalid";
+												$exquery4 = $Koneksi->getKonek()->query($reset);
 												if($exquery4){
 													echo "Anda telah berhasil menghapus data<br>";
 												}
@@ -73,7 +71,15 @@
 											}
 										}
 										else{
-											echo "Anda telah berhasil menghapus data<br>";
+											$totalid = $hasil[0]["COUNT(*)"]+1;
+											$reset = "ALTER TABLE produk AUTO_INCREMENT = $totalid";
+											$exquery4 = $Koneksi->getKonek()->query($reset);
+											if($exquery4){
+												echo "Anda telah berhasil menghapus data<br>";
+											}
+											else{
+												echo "Anda tidak berhasil menghapus data<br>";
+											}
 										}
 									}
 								}

@@ -120,9 +120,7 @@
 			<li ><a href="?page=barang">Barang</a></li>
 			<li ><a href="?page=perumahan">Perumahan</a></li>
 			<li ><a href="?page=user" >User</a></li>
-			<!--<li class="puter"><a href="?page=pengeluaran">Pengeluaran</a></li>
-			<li class="puter"><a href="?page=keuntungan">Keuntungan</a></li>
-			<li class="puter"><a href="?page=user">User</a></li>-->
+			<li ><a href="?page=driver" >Driver</a></li>
 		</ul>
 	</nav>
 	<article>
@@ -136,17 +134,8 @@
 			else if(@$_GET["page"] == "perumahan"){
 				include "page/perumahan.php";
 			}
-			else if(@$_GET["page"] == "pengiriman"){
-				include "page/pengiriman.php";
-			}
-			else if(@$_GET["page"] == "pengeluaran"){
-				include "page/pengeluaran.php";
-			}
-			else if(@$_GET["page"] == "keuntungan"){
-				include "page/keuntungan.php";
-			}
-			else if(@$_GET["page"] == "mentah"){
-				include "page/mentah.php";
+			else if(@$_GET["page"] == "driver"){
+				include "page/driver.php";
 			}
 			else if(@$_GET["page"] == "user"){
 				include "page/user.php";

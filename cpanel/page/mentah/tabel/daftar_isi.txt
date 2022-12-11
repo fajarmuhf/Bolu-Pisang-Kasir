@@ -1,2 +1,0 @@
-1;Tepung Tapioka;12000;1 kilo;1_book-tree.jpg;
-2;Minyak;6000;1 kilo;2_later-fireworks-ag.gif;

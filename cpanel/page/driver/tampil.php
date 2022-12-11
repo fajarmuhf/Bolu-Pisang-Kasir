@@ -1,7 +1,7 @@
 			<?php
 				include "page/secure.php";
 
-				$namapage = "user";
+				$namapage = "driver";
 				if(@$_POST['Aksi'] != "" && @$_POST['identitas'] != ""){
 					if($_POST['Aksi'] == 'edit'){
 						echo "<script>window.location='?page=$namapage&i=edit&id=".$_POST['identitas']."'</script>";
@@ -13,17 +13,16 @@
 				
 				$Koneksi->Konek("fandystore");
 								
-				$query = "SELECT * FROM `produk` WHERE 1 ";
+				$query = "SELECT * FROM `driver` WHERE 1 ";
 				$exquery = mysqli_query($Koneksi->getKonek(),$query);
 				if($exquery){
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
 					echo "<h3>Data - Data ",ucfirst($namapage)."</h3>";
 					echo "<input type=text placeholder='cari nama $namapage...' name='pencarian' class='pencarian' id='pencarian'>";
-					echo "<table align=center border=1 id=tabelku class=CSSTableGenerator >
-						<tr><td>Id</td><td>Nama</td><td>Encrypted Password</td><td>Status</td><td>Perum</td><td>Aksi</td></tr>
+					echo "<div id='tables'>
 					";
-					echo "</table>";
+					echo "</div>";
 					echo "</form>";
 				}
 				else{
@@ -47,7 +46,6 @@
 				function search(){
 					load_flag=0;
 					key=document.getElementById('pencarian').value;
-					jQuery('#tabelku').html('<tr><td>Id</td><td>Nama</td><td>Encrypted Password</td><td>Status</td><td>Perum</td><td>Aksi</td></tr>');
 					loadMore(load_flag,key);
 				}
 				
@@ -62,7 +60,12 @@
 						data:'start='+load_flag+'&key='+key,
 						type:'post',
 						success:function(result){
-							jQuery('#tabelku').append(result);
+							if(jQuery('#tables').html()=='\n\t\t\t\t\t'){
+								jQuery('#tables').append(result);
+							}
+							else{
+								jQuery('#tabelku').append(result);
+							}
 							load_flag+=3;
 							lagiloading=false;
 						}
