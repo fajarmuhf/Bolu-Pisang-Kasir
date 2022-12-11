@@ -3,7 +3,11 @@
 ?>
 <!DOCTYPE HTML>
 <head>
-	<title>Perusahaan Bolu Pisang</title>
+	<title><?php 
+				include "../include/koneksi.php";
+				$Koneksi = new Hubungi();
+				echo $Koneksi->getJudul();
+			?></title>
 	<link rel="stylesheet" href="../style.css" >
 	<script src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery-ui.js"></script>
@@ -103,7 +107,9 @@
 </head>
 <body>
 	<header>
-		<h2>Perusahaan Bolu Pisang</h2>
+		<h2><?php
+				echo $Koneksi->getJudul();
+		?></h2>
 	</header>
 	<nav>
 		<ul>
