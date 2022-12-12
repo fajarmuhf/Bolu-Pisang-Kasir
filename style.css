@@ -4,7 +4,7 @@ body{
 }
 :root{
    --yellow:#fed330;
-   --red:#e74c3c;
+   --red:navy;
    --white:#fff;
    --black:#222;
    --light-color:#777;
@@ -355,9 +355,11 @@ ul{
 	font-size:120%;
 	text-align:center;
 	padding: 0px;
+	padding-bottom: 10px;
 	margin:0px;
 }
 ul li{
+	font-size: 2em;
 	border:0px;
 	border-style:solid;
 	border-color:blue;
@@ -462,6 +464,7 @@ p{
 	float:right;
 	width:83%;
 	margin: auto;
+	padding-bottom: 15px;
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, DeepSkyBlue), color-stop(1, LightSkyBlue) );
 	background:-moz-linear-gradient( center top, DeepSkyBlue 5%, LightSkyBlue 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
