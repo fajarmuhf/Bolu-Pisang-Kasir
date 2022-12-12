@@ -10,7 +10,6 @@ Fandy Store Web adalah aplikasi laporan dan kasir sembako berbasis website.
 - Prosesor : 2,3 GHz Dual-Core Intel Core i5
 - GPU : Intel Iris Plus Graphics 640 1536 MB
 - RAM : 8 GB
-- Game Engine : Unity 2021.3.8f1 LTS
 
 ## Progress Proyek
 
