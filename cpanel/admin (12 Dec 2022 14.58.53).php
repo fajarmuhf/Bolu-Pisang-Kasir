@@ -1,5 +1,7 @@
 <?php
 	session_start();
+
+	include "page/secure.php";
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -10,7 +12,7 @@
 			?></title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-	<link rel="stylesheet" href="../style.css" >
+    <link rel="stylesheet" href="../style.css" >
 	<script src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery-ui.js"></script>
 	<script src="../js/jquery-ui-timepicker-addon.js"></script>
@@ -110,11 +112,15 @@
 <body>
 	<header class="header">
 		<section class="flex">
-			<a href="kasif.php" class="logo"><?php
+			<a href="admin.php" class="logo"><?php
 					echo $Koneksi->getJudul();
 			?></a>
 			<nav class="navbar">
-				<a href="?page=penjualan">Keranjang</a>
+				<a href="?page=penjualan">Keranjang</a></li>
+				<a href="?page=barang">Barang</a></li>
+				<a href="?page=perumahan">Perumahan</a></li>
+				<a href="?page=user" >User</a></li>
+				<a href="?page=driver" >Driver</a></li>
 			</nav>
 			<div class="icons">
 	         <div id="menu-btn" class="fas fa-bars"></div>
@@ -123,24 +129,26 @@
 	        <div class="profile">
 	         <p class="name"><?= $_SESSION["username"]; ?></p>
 	         <a href="logout.php" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+	      </div>
 		</section>
 	</header>
+	
 	<article>
 		<?php
-			if(@$_GET["page"] == "stok"){
-				include "kasir/page/stok.php";
-			}
-			else if(@$_GET["page"] == "barang"){
-				include "kasir/page/barang.php";
+			if(@$_GET["page"] == "barang"){
+				include "page/barang.php";
 			}
 			else if(@$_GET["page"] == "penjualan"){
-				include "kasir/page/penjualan.php";
+				include "page/penjualan.php";
 			}
-			else if(@$_GET["page"] == "pengiriman"){
-				include "kasir/page/pengiriman.php";
+			else if(@$_GET["page"] == "perumahan"){
+				include "page/perumahan.php";
+			}
+			else if(@$_GET["page"] == "driver"){
+				include "page/driver.php";
 			}
 			else if(@$_GET["page"] == "user"){
-				include "kasir/page/user.php";
+				include "page/user.php";
 			}
 			else{
 				echo "<p class=about>Welcome , ".$_SESSION["username"]."</p>";
@@ -170,4 +178,3 @@
 	</script>
 </body>
 </html>
-

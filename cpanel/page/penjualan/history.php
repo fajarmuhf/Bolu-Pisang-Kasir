@@ -116,7 +116,7 @@
 							$tglawal
 						</div>
 						<div style='float:left;width:33%;'>
-							<h3>Data - Data ",ucfirst($namapage)."</h3>
+							<h1 class='title'>Data - Data ",ucfirst($namapage)."</h1>
 						</div>
 						<div style='float:left;width:33%;margin-top:15px;'>
 							<input style='border:1px solid blue;border-radius:25px;' type='text' class='tanggal' name='tglafter' id='tglafter' onchange='cekTanggal()'><br>

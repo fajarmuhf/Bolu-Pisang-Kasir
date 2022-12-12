@@ -1,6 +1,5 @@
 			<?php
 				
-				include "include/koneksi.php";
 				$Koneksi = new Hubungi();
 				$Koneksi->Konek("fandystore");
 
@@ -61,7 +60,7 @@
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
 					echo "<input type=hidden id=banyakitem name=banyakitem>";
-					echo "<h3>Data - Data ",ucfirst($namapage)."</h3>";
+					echo "<h1 class='title'>Tambah Barang</h1>";
 					echo "<input type=text placeholder='cari nama ,deskripsi atau tag barang...' name='pencarian' class='pencarian' id='pencarian'>";
 					echo "<table align=center border=1 id=tabelku class=CSSTableGenerator >
 					<tr>

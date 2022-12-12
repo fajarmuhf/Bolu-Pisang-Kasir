@@ -5,7 +5,7 @@
 	include "../../../include/koneksi.php";
 	$Koneksi = new Hubungi();
 	$Koneksi->Konek("fandystore");
-	$banyakindex = 3;
+	$banyakindex = 5;
 				
 	if(isset($_POST['start']) && @$_POST['start'] >= 0){		
 		$start = $_POST['start'];		

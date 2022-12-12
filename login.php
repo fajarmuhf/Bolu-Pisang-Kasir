@@ -16,20 +16,21 @@
 				$Koneksi = new Hubungi();
 				echo $Koneksi->getJudul();
 			?></title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="style.css" >
 </head>
 <body>
-	<header>
-		<h2><?php echo $Koneksi->getJudul(); ?></h2>
+	<header class="header">
+		<section class="flex">
+			<a href="index.php" class="logo"><?php echo $Koneksi->getJudul(); ?></a>
+			<nav class="navbar">
+				<a href="index.php">Home</a>
+				<a href="login.php">Login</a>
+				<a href="about.php">About</a>
+			</nav>
+		</section>
 	</header>
-	<nav>
-		<ul>
-			<li class="puter"><a href="index.php">Home</a></li>
-			<li class="puter"><a href="login.php">Login</a></li>
-			<li class="puter"><a href="register.php">Register</a></li>
-			<li class="puter"><a href="about.php">About</a></li>
-		</ul>
-	</nav>
 	<article>
 		<form action="?Login=1" method="post">
 			<table class=Login>

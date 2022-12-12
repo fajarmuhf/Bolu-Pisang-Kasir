@@ -18,7 +18,7 @@
 				if($exquery){
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
-					echo "<h3>Data - Data ",ucfirst($namapage)."</h3>";
+					echo "<h1 class='title'>Data - Data ",ucfirst($namapage)."</h1>";
 					echo "<input type=text placeholder='cari nama $namapage...' name='pencarian' class='pencarian' id='pencarian'>";
 					echo "<table align=center border=1 id=tabelku class=CSSTableGenerator >
 						<tr><td>Id</td><td>Nama</td><td>Encrypted Password</td><td>Status</td><td>Perum</td><td>Aksi</td></tr>

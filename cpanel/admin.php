@@ -10,7 +10,9 @@
 				$Koneksi = new Hubungi();
 				echo $Koneksi->getJudul();
 			?></title>
-	<link rel="stylesheet" href="../style.css" >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../style.css" >
 	<script src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery-ui.js"></script>
 	<script src="../js/jquery-ui-timepicker-addon.js"></script>
@@ -44,7 +46,7 @@
 		#controls{		
 			position:absolute;
 			left:35%;
-			top:200px;
+			top:120px;
 			background-color:navy;
 			float:left;
 			width:100px;
@@ -59,7 +61,7 @@
 		#controls2{
 			position:absolute;
 			left:50%;
-			top:200px;
+			top:120px;
 			background-color:navy;
 			float:left;
 			width:245px;
@@ -108,21 +110,29 @@
 	</script>
 </head>
 <body>
-	<header>
-		<h2><?php
-				echo $Koneksi->getJudul();
-		?></h2>
+	<header class="header">
+		<section class="flex">
+			<a href="admin.php" class="logo"><?php
+					echo $Koneksi->getJudul();
+			?></a>
+			<nav class="navbar">
+				<a href="?page=penjualan">Keranjang</a></li>
+				<a href="?page=barang">Barang</a></li>
+				<a href="?page=perumahan">Perumahan</a></li>
+				<a href="?page=user" >User</a></li>
+				<a href="?page=driver" >Driver</a></li>
+			</nav>
+			<div class="icons">
+	         <div id="menu-btn" class="fas fa-bars"></div>
+	         <div id="user-btn" class="fas fa-user"></div>
+	        </div>
+	        <div class="profile">
+	         <p class="name"><?= $_SESSION["username"]; ?></p>
+	         <a href="logout.php" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+	      </div>
+		</section>
 	</header>
-	<nav>
-		<ul>
-			<li ><a href="logout.php" >Logout</a></li>
-			<li ><a href="?page=penjualan">Keranjang</a></li>
-			<li ><a href="?page=barang">Barang</a></li>
-			<li ><a href="?page=perumahan">Perumahan</a></li>
-			<li ><a href="?page=user" >User</a></li>
-			<li ><a href="?page=driver" >Driver</a></li>
-		</ul>
-	</nav>
+	
 	<article>
 		<?php
 			if(@$_GET["page"] == "barang"){
@@ -148,5 +158,23 @@
 	<footer>
 		<small>&copy; 2013 Fajar Muhammad F</small>
 	</footer>
+	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+	<!-- custom js file link  -->
+	<script src="../js/script.js"></script>
+
+	<script>
+
+	var swiper = new Swiper(".hero-slider", {
+	   loop:true,
+	   grabCursor: true,
+	   effect: "flip",
+	   pagination: {
+	      el: ".swiper-pagination",
+	      clickable:true,
+	   },
+	});
+
+	</script>
 </body>
 </html>

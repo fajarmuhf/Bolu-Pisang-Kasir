@@ -22,17 +22,15 @@
 	<link rel="stylesheet" href="css/jquery-ui.css" >
 </head>
 <body>
-	<header>
-		<h2><?php echo $Koneksi->getJudul(); ?></h2>
+	<header class="header">
+		<section class="flex">
+			<a href="index.php" class="logo"><?php echo $Koneksi->getJudul(); ?></a>
+			<nav class="navbar">
+				<a href="index.php">Home</a>
+				<a href="about.php">About</a>
+			</nav>
+		</section>
 	</header>
-	<nav>
-		<ul>
-			<li class="puter"><a href="index.php">Home</a></li>
-			<li class="puter"><a href="login.php">Login</a></li>
-			<li class="puter"><a href="register.php">Register</a></li>
-			<li class="puter"><a href="about.php">About</a></li>
-		</ul>
-	</nav>
 	<article>
 		<form action="login.php?Login=1" method="post">
 			<table class=Login>

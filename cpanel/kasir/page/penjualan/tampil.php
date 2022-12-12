@@ -1,5 +1,4 @@
 			<?php
-				include "include/koneksi.php";
 
 				$Koneksi = new Hubungi();
 				$Koneksi->Konek("fandystore");
@@ -83,7 +82,7 @@
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
 					echo "<input type=hidden id=checkstatus name=checkstatus>";
-					echo "<h3>Data - Data ",ucfirst($namapage)."</h3>";
+					echo "<h1 class='title'>Data - Data ",ucfirst($namapage)."</h1>";
 					echo "<table align=center border=1 id=tabelku class=CSSTableGenerator >
 					<tr>
 						<td>Nama</td><td>Gambar</td><td>Jumlah</td><td>Harga</td><td>Total Bayar</td>
