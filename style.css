@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
-
+body{
+	background-color: DodgerBlue;
+}
 :root{
    --yellow:#fed330;
    --red:#e74c3c;
@@ -173,7 +175,7 @@ h3{
    position: sticky;
    top:0; left:0; right:0;
    z-index: 1000;
-   background-color: var(--white);
+   background-color: MidnightBlue;
    border-bottom: var(--border);
 }
 
@@ -186,12 +188,12 @@ h3{
 
 .header .flex .logo{
    font-size: 2.5rem;
-   color:var(--black);
+   color:white;
 }
 
 .header .flex .navbar a{
    font-size: 2rem;
-   color:var(--black);
+   color:white;
    margin:0 1rem;
 }
 
@@ -203,7 +205,7 @@ h3{
 .header .flex .icons > *{
    margin-left: 1.5rem;
    font-size: 2.5rem;
-   color:var(--black);
+   color:white;
    cursor: pointer;
 }
 
@@ -345,6 +347,9 @@ footer{
 	clear:both;
 	font-family:arial;
 	text-align:center;
+}
+small{
+	color: white;
 }
 ul{
 	font-size:120%;
@@ -715,6 +720,14 @@ p{
 	border-width:0px 0px 1px 1px;
 }
 .about{
+	font-size:2.6em;
+	font-family:Arial;
+	color: white;
+	font-weight:bold;
+	margin:auto;
+	text-align:center;
+}
+.titlegraph{
 	font-size:2.6em;
 	font-family:Arial;
 	color: black;
