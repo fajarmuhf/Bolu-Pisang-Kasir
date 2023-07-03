@@ -1,2 +1,0 @@
-1;admin;123;admin;
-2;pusat;123;user;

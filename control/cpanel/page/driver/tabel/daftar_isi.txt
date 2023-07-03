@@ -1,0 +1,2 @@
+1;Bolu Pisang;25000;ok;1_bolu.jpg;
+2;Bolu Keju;30000;ok;2_cake keju kcl.jpg;

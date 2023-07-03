@@ -23,6 +23,7 @@ Membuat aplikasi kasir | Done | Jumat,9 Desember 2022 | - | -
 Membuat laporan keuntungan ,modal dan Omset | Done | Jumat,9 Desember 2022 | - | -
 Membuat CRUD Driver | Done | Minggu,11 Desember 2022 | - | -
 Membuat Simple Desain | Done | Senin,12 Desember 2022 | - | -
+Membuat CRUD Aset | Done | Selasa,13 Desember 2022 | - | -
 Membuat grafik keuntungan ,modal dan Omset | Not Yet | - | - | -
 
 ## License

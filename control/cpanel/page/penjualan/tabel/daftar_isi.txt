@@ -1,0 +1,2 @@
+208;2023-06-05 07:09:27;1 - fandy;;Kopi Cap Liong - 20 x 1500 = 30000<br><b style="color: coral;">Biaya Ongkir = 0<br><b style="color: blue;">SubTotal = 30000 ;Nirwana Estate Cibinong, Bogor;Cash;selesai;;sudah;
+207;2023-06-04 15:52:34;1 - fandy;;Luwak White Koffie - 1 x 15000 = 15000<br>Kopi ABC Susu - 20 x 1500 = 30000<br>Good Day Cappuccino - 10 x 2000 = 20000<br><b style="color: coral;">Biaya Ongkir = 0<br><b style="color: blue;">SubTotal = 65000 ;Nirwana Estate Cibinong, Bogor;Cash;selesai;;sudah;
