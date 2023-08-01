@@ -32,10 +32,36 @@
 								$exquery->bind_param("issi",$banyakitem,$tanggal,$tanggal,$idcart);
 								$result = $exquery->execute();
 								if($result){
-									echo "Anda telah berhasil menginput data ke keranjang<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'success',
+								    title: 'Sukses',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 								else{
-									echo "Anda tidak berhasil menginput data ke keranjang<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 							}
 							else{
@@ -44,10 +70,36 @@
 								$exquery->bind_param("iisiss",$iduser,$itemid,$username,$banyakitem,$tanggal,$tanggal);
 								$result = $exquery->execute();
 								if($result){
-									echo "Anda telah berhasil menginput data ke keranjang<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'success',
+								    title: 'Sukses',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 								else{
-									echo "Anda tidak berhasil menginput data ke keranjang<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}		
 							}
 						}

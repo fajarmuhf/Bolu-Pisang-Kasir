@@ -1,2 +1,2 @@
-1;admin;123;admin;
-2;pusat;123;user;
+1;Bolu Pisang;25000;ok;1_bolu.jpg;
+2;Bolu Keju;30000;ok;2_cake keju kcl.jpg;

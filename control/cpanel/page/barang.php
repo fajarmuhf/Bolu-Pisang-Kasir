@@ -1,6 +1,7 @@
 <div id="sidebar">
 	<ul>
 		<li class="geser"><a href="?page=barang&i=input">Tambah</a></li>
+		<li class="geser"><a href="?page=barang&i=input2">Salin Perum</a></li>
 		<?php
 			include "barang/inputsearch.php";
 		?>
@@ -10,6 +11,9 @@
 	<?php
 		if(@$_GET["i"] == "input"){
 			include "barang/input.php";
+		}
+		else if(@$_GET["i"] == "input2"){
+			include "barang/input2.php";
 		}
 		else if(@$_GET["i"] == "edit"){
 			include "barang/edit.php";

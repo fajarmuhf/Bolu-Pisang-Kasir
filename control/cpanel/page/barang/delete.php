@@ -43,7 +43,7 @@
 								$exquery21->bind_param("i",$nilai);
 								$exquery = $exquery21->execute();
 								if($exquery){
-									unlink("../../../images/".$hasil[0]['imageurl']);
+									unlink("../images/".$hasil[0]['imageurl']);
 									$query2 = "SELECT COUNT(*) FROM produk WHERE Id > ?";
 									$exquery31=$Koneksi->getKonek()->prepare($query2);
 									$exquery31->bind_param("i",$nilai);

@@ -116,7 +116,7 @@
 									$mobilbaru->setNama($nama);
 									$mobilbaru->setHarga($harga);
 										
-									 if (isset($_FILES["gambar"]) && @$_FILES["gambar"]["size"] > 0 && file_exists("../../images/" . @$_FILES["gambar"]["name"]))
+									 if (isset($_FILES["gambar"]) && @$_FILES["gambar"]["size"] > 0 && file_exists("../images/" . @$_FILES["gambar"]["name"]))
 									 {
 										echo $gambar . " already exists. ";
 									 }
@@ -124,9 +124,9 @@
 									 {
 									 	if(isset($_FILES["gambar"]) && @$_FILES["gambar"]["size"] > 0){
 										 	if ($hasil['imageurl'] != ""){
-												unlink("../../../images/".$hasil['imageurl']);
+												unlink("../images/".$hasil['imageurl']);
 											}
-											move_uploaded_file($_FILES["gambar"]["tmp_name"],"../../../images/" . $gambar);							
+											move_uploaded_file($_FILES["gambar"]["tmp_name"],"../images/" . $gambar);							
 											$query = "UPDATE `produk` SET nama = ?,deskripsi = ?,stock = ?,satuan = ?,modal = ?,harga = ?,perum = ?,tag = ?,jumlahklik = ?,imageurl = ?,expdate = ?,barcode = ? WHERE id = ? ";
 											$exquery=$Koneksi->getKonek()->prepare($query);
 											$exquery->bind_param("ssisiississsi",$nama,$deskripsi,$stok,$satuan,$modal,$harga,$perum,$tag,$jumlahklik,$gambar,$expire,$barcode,$nilai);

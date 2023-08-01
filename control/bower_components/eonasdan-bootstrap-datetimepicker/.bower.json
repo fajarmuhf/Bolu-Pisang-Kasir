@@ -1,0 +1,15 @@
+{
+  "name": "eonasdan-bootstrap-datetimepicker",
+  "homepage": "https://github.com/Eonasdan/bootstrap-datetimepicker",
+  "version": "6.7.10",
+  "_release": "6.7.10",
+  "_resolution": {
+    "type": "version",
+    "tag": "v6.7.10",
+    "commit": "93de311d9db5cb861931c16a06568a742413f1a8"
+  },
+  "_source": "https://github.com/Eonasdan/bootstrap-datetimepicker.git",
+  "_target": "^6.7.10",
+  "_originalSource": "eonasdan-bootstrap-datetimepicker",
+  "_direct": true
+}

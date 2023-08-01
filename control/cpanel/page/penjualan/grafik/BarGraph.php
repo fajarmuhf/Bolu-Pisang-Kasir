@@ -13,8 +13,8 @@
 	$Koneksi = new Hubungi();
 	$Koneksi->Konek("fandystore");
 	
-	$tglawal = $_SESSION['tglbefore'];
-	$tglakhir = $_SESSION['tglafter'];
+	$tglawal = $_SESSION['tglbefore2'];
+	$tglakhir = $_SESSION['tglafter2'];
 
 	$query = "SELECT * FROM `clientorder` WHERE updateorder >= '$tglawal' AND updateorder <= '$tglakhir' ORDER BY updateorder ASC ";
 	$exquery=$Koneksi->getKonek()->prepare($query);

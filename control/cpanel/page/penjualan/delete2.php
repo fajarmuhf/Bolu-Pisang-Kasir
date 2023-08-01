@@ -124,30 +124,113 @@
 													$exquery52->bind_param("i",$nilai);
 													$exquery5 = $exquery52->execute();
 													if($exquery5){
-														echo "Anda telah berhasil menghapus data<br>";
+														echo "<script>Swal.fire({
+														    toast: true,
+														    icon: 'success',
+														    title: 'Sukses',
+														    animation: false,
+														    position: 'bottom',
+														    showConfirmButton: false,
+														    timer: 3000,
+														    timerProgressBar: true,
+														    didOpen: (toast) => {
+														      toast.addEventListener('mouseenter', Swal.stopTimer)
+														      toast.addEventListener('mouseleave', Swal.resumeTimer)
+														    }
+														  }).then(() => {
+															   window.location = 'admin.php?page=penjualan&i=history';
+														  })</script>";
 													}
 													else{
-														echo "Anda tidak berhasil menghapus data<br>";
+														echo "<script>Swal.fire({
+													    toast: true,
+													    icon: 'error',
+													    title: 'Gagal',
+													    animation: false,
+													    position: 'bottom',
+													    showConfirmButton: false,
+													    timer: 3000,
+													    timerProgressBar: true,
+													    didOpen: (toast) => {
+													      toast.addEventListener('mouseenter', Swal.stopTimer)
+													      toast.addEventListener('mouseleave', Swal.resumeTimer)
+													    }
+													  })</script>";
 													}
 												}
 												else{
-													echo "Anda tidak berhasil menghapus data<br>";
+													echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'error',
+												    title: 'Gagal',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  })</script>";
 												}
 											}
 											else{
-												echo "Anda tidak berhasil menghapus data<br>";
+												echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'error',
+												    title: 'Gagal',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  })</script>";
 											}
 										}
 										else{
 											$jumlahclientorder = $hitung[0]['COUNT(*)']+1;
 											$query4 = "ALTER TABLE clientorder AUTO_INCREMENT=$jumlahclientorder";
 											$exquery42=mysqli_query($Koneksi->getKonek(),$query4);
-											echo "Anda telah berhasil menghapus data<br>";
+											
+											echo "<script>Swal.fire({
+										    toast: true,
+										    icon: 'success',
+										    title: 'Sukses',
+										    animation: false,
+										    position: 'bottom',
+										    showConfirmButton: false,
+										    timer: 3000,
+										    timerProgressBar: true,
+										    didOpen: (toast) => {
+										      toast.addEventListener('mouseenter', Swal.stopTimer)
+										      toast.addEventListener('mouseleave', Swal.resumeTimer)
+										    }
+										  }).then(() => {
+											   window.location = 'admin.php?page=penjualan&i=history';
+										  })</script>";
 										}
 									}
 								}
 								else{
-									echo "Anda tidak berhasil menghapus data<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 							}
 						}

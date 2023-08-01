@@ -56,9 +56,9 @@
 						}
 					}
 					if($num > 0){
-						$query = "INSERT INTO `clientorder` SELECT (COUNT(*)+1),?,NULL,?,NULL,?,?,'','','selesai',0,0,NULL,'sudah',?,? FROM `clientorder` WHERE 1 ";
+						$query = "INSERT INTO `clientorder` SELECT (COUNT(*)+1),?,NULL,?,NULL,?,?,'','','selesai',0,0,NULL,'sudah',?,?,? FROM `clientorder` WHERE 1 ";
 						$exquery=$Koneksi->getKonek()->prepare($query);
-						$exquery->bind_param("isisss",$iduser,$username,$biayaongkir,$pembayaran,$tanggal,$tanggal);
+						$exquery->bind_param("isissss",$iduser,$username,$biayaongkir,$pembayaran,$tanggal,$tanggal,$perum);
 						$result = $exquery->execute();
 						if($result){
 							$kueh = "SELECT * FROM clientorder as A,cart as B WHERE A.restock IS NULL AND A.status = 'selesai' AND A.id = ? AND A.id = B.orderid";
@@ -78,18 +78,70 @@
 									
 								}
 								if(count($hasil) > 0){
-									echo "Anda telah berhasil menginput data ke keranjang<br>";	
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'success',
+								    title: 'Sukses',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";	
 								}
 								else{
-									echo "Anda tidak berhasil menginput data ke keranjang<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 							}
 							else{
-								echo "Anda tidak berhasil menginput data ke keranjang<br>";
+								echo "<script>Swal.fire({
+							    toast: true,
+							    icon: 'error',
+							    title: 'Gagal',
+							    animation: false,
+							    position: 'bottom',
+							    showConfirmButton: false,
+							    timer: 3000,
+							    timerProgressBar: true,
+							    didOpen: (toast) => {
+							      toast.addEventListener('mouseenter', Swal.stopTimer)
+							      toast.addEventListener('mouseleave', Swal.resumeTimer)
+							    }
+							  })</script>";
 							}
 						}
 						else{
-							echo "Anda tidak berhasil menginput data ke keranjang<br>";
+							echo "<script>Swal.fire({
+						    toast: true,
+						    icon: 'error',
+						    title: 'Gagal',
+						    animation: false,
+						    position: 'bottom',
+						    showConfirmButton: false,
+						    timer: 3000,
+						    timerProgressBar: true,
+						    didOpen: (toast) => {
+						      toast.addEventListener('mouseenter', Swal.stopTimer)
+						      toast.addEventListener('mouseleave', Swal.resumeTimer)
+						    }
+						  })</script>";
 						}	
 					}
 				}				
@@ -114,16 +166,9 @@
 					echo "<form action='' id=daftar method=POST >";
 					echo "<input type=hidden id=identitas name=identitas>";
 					echo "<input type=hidden id=checkstatus name=checkstatus>";
-					echo "<h1 class='title'>Data - Data keranjang</h1>";
-					echo "<div style='overflow-x: scroll;'>";
-					echo "<table align=center border=1 id=tabelku class=CSSTableGenerator >
-					<tr>
-						<td>Nama</td><td>Gambar</td><td>Jumlah</td><td>Harga</td><td>Total Bayar</td>
-					<td>Aksi</td>
-					</tr>";
+					echo "<h1 class='title'>Notifikasi</h1>";
+					echo "<table align=center border=1 id=tabelku class=CSSTableGenerator >";
 					echo "</table>";
-					echo "</div>";
-					echo "<input class='button' style='margin-top:10px;margin-bottom:7px;' id='checkout' name='checkout' value='checkout' onclick=\"document.getElementById('checkstatus').value='yes';document.getElementById('daftar').submit()\">";
 					echo "</form>";
 				}
 				else{
@@ -165,7 +210,7 @@
 				function search(){
 					load_flag=0;
 					key=document.getElementById('pencarian').value;
-					jQuery('#tabelku').html('<tr><td>Id</td><td>Nama</td><td>Deskripsi</td><td>Stok</td><td>Satuan</td><td>Harga</td><td>Perum</td></td><td>Tag</td><td>Gambar</td><td>Expire</td><td>Aksi</td></tr>');
+					jQuery('#tabelku').html('<tr></tr>');
 					loadMore(load_flag,key);
 				}
 				var load_flag=0;
@@ -179,11 +224,21 @@
 						data:'start='+load_flag+'&key='+key,
 						type:'post',
 						success:function(result){
+							if(load_flag==0){
+								jQuery('#tabelku').html('<tr></tr>');
+							}
 							jQuery('#tabelku').append(result);
-							load_flag+=3;
+							load_flag+=7;
 							lagiloading=false;
 						}
 					});
 					}
 				}
+				jQuery(document).ready(function(){
+					jQuery(window).scroll(function(){
+						if(jQuery(window).scrollTop()>=jQuery(document).height() - jQuery(window).height() - 100){
+							loadMore(load_flag,key);
+						} 
+					})
+				});
 			</script>

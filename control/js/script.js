@@ -1,11 +1,10 @@
 navbar = document.querySelector('.header .flex .navbar');
+profile = document.querySelector('.header .flex .profile');
 
 document.querySelector('#menu-btn').onclick = () =>{
    navbar.classList.toggle('active');
    profile.classList.remove('active');
 }
-
-profile = document.querySelector('.header .flex .profile');
 
 document.querySelector('#user-btn').onclick = () =>{
    profile.classList.toggle('active');

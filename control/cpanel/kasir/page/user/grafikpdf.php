@@ -9,7 +9,7 @@
 	$fpdf->SetTitle('Pemograman Internet 2');
 	$fpdf->SetAuthor('Fajar MF');
 	$fpdf->SetY(70);
-	$fpdf->Cell(55,20,'Grafik Data User');
+	$fpdf->Cell(55,20,'Grafik Data Barang');
 	//menset awal X dan Y
 	$fpdf->SetFont('Courier','B',12);
 	
@@ -39,7 +39,7 @@
 	$fpdf->SetTitle('Pemograman Internet 2');
 	$fpdf->SetAuthor('Fajar MF');
 	$fpdf->SetY(70);
-	$fpdf->Cell(55,20,'Grafik Data User');
+	$fpdf->Cell(55,20,'Grafik Data Barang');
 	//menset awal X dan Y
 	$fpdf->SetFont('Courier','B',12);
 	
@@ -70,7 +70,7 @@
 	$fpdf->SetTitle('Pemograman Internet 2');
 	$fpdf->SetAuthor('Fajar MF');
 	$fpdf->SetY(70);
-	$fpdf->Cell(55,20,'Grafik Data User');
+	$fpdf->Cell(55,20,'Grafik Data Barang');
 	//menset awal X dan Y
 	$fpdf->SetFont('Courier','B',12);
 	

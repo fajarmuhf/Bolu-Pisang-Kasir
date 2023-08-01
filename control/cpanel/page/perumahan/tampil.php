@@ -34,6 +34,9 @@
 				
 			?>
 			<script>
+				var myTimeout = setTimeout(function(){
+					
+				 },2000);
 				$('#pencarian').on('keyup keypress', function(e) {
 				  var keyCode = e.keyCode || e.which;
 				  if (keyCode === 13) { 
@@ -63,7 +66,7 @@
 						type:'post',
 						success:function(result){
 							jQuery('#tabelku').append(result);
-							load_flag+=3;
+							load_flag+=10;
 							lagiloading=false;
 						}
 					});

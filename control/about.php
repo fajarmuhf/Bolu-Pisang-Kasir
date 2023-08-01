@@ -1,8 +1,48 @@
+<?php
+	date_default_timezone_set('Asia/Jakarta');
+	session_start();
+	include "include/koneksi.php";
+	$Koneksi = new Hubungi();
+	$Koneksi->Konek("fandystore");
+
+	if(!(isset($_SESSION['username']) && isset($_SESSION['password']) && isset($_SESSION['status']))){
+		if(isset($_COOKIE['token'])){
+			$cookie = $_COOKIE['token'] ?? null;
+			if($cookie && strstr($cookie, ":")){
+				$parts = explode(":", $cookie);
+				$token_key = $parts[0];
+				$token_value = $parts[1];
+				$expires = time() + ((60*60*24) * 7);
+
+				$query2 = "select * from `user-manager` where token_key = ? AND token_value = ?";
+				$exquery2=$Koneksi->getKonek()->prepare($query2);
+				$exquery2->bind_param("ss",$token_key,$token_value);
+				$exquery2->execute();
+
+				if($exquery2){
+					$tampil2=$exquery2->get_result()->fetch_all(MYSQLI_ASSOC);
+
+					$_SESSION["username"]=$tampil2[0]["Username"];
+					$_SESSION["password"]=($tampil2[0]["Password"]);
+					$_SESSION["status"]=$tampil2[0]['Status'];
+
+				}
+			}
+		}
+	}
+
+	if(isset($_SESSION["username"]) && isset($_SESSION['password']) && isset($_SESSION['status'])){
+		if($_SESSION['status'] == 'admin'){
+			echo "<script>window.location='cpanel/admin.php'</script>";
+		}
+		else if($_SESSION['status'] == 'kasir'){
+			echo "<script>window.location='cpanel/kasir.php'</script>";
+		}
+	}
+?>
 <!DOCTYPE HTML>
 <head>
 	<title><?php 
-				include "include/koneksi.php";
-				$Koneksi = new Hubungi();
 				echo $Koneksi->getJudul();
 			?></title>
 	<link rel="stylesheet" href="style.css" >

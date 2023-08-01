@@ -793,3 +793,23 @@ a{
 	width: 80%;
 	margin-bottom:12px;
 }
+
+.wrapper{
+	display: flex;
+	background: #FFF;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px;
+	border: 2px solid black;
+}
+.wrapper span{
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+}
+.wrapper span.num{
+	font-size: 18px;
+	border-right: 2px solid rgba(0,0,0,0.2);
+	border-left: 2px solid rgba(0,0,0,0.2);
+}

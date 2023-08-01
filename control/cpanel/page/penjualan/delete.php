@@ -53,14 +53,55 @@
 												$reset = "ALTER TABLE cart AUTO_INCREMENT = $totalid";
 												$exquery4 = $Koneksi->getKonek()->query($reset);
 												if($exquery4){
-													echo "Anda telah berhasil menghapus data<br>";
+													echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'success',
+												    title: 'Sukses',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  }).then(() => {
+													   window.location = 'admin.php?page=penjualan';
+												  })</script>";
 												}
 												else{
-													echo "Anda tidak berhasil menghapus data<br>";
+													echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'error',
+												    title: 'Gagal',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  })</script>";
 												}
 											}
 											else{
-												echo "Anda tidak berhasil menghapus data<br>";
+												echo "<script>Swal.fire({
+											    toast: true,
+											    icon: 'error',
+											    title: 'Gagal',
+											    animation: false,
+											    position: 'bottom',
+											    showConfirmButton: false,
+											    timer: 3000,
+											    timerProgressBar: true,
+											    didOpen: (toast) => {
+											      toast.addEventListener('mouseenter', Swal.stopTimer)
+											      toast.addEventListener('mouseleave', Swal.resumeTimer)
+											    }
+											  })</script>";
 											}
 										}
 										else{
@@ -68,16 +109,57 @@
 											$reset = "ALTER TABLE cart AUTO_INCREMENT = $totalid";
 											$exquery4 = $Koneksi->getKonek()->query($reset);
 											if($exquery4){
-												echo "Anda telah berhasil menghapus data<br>";
+												echo "<script>Swal.fire({
+											    toast: true,
+											    icon: 'success',
+											    title: 'Sukses',
+											    animation: false,
+											    position: 'bottom',
+											    showConfirmButton: false,
+											    timer: 3000,
+											    timerProgressBar: true,
+											    didOpen: (toast) => {
+											      toast.addEventListener('mouseenter', Swal.stopTimer)
+											      toast.addEventListener('mouseleave', Swal.resumeTimer)
+											    }
+											  }).then(() => {
+												   window.location = 'admin.php?page=penjualan';
+											  })</script>";
 											}
 											else{
-												echo "Anda tidak berhasil menghapus data<br>";
+												echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'error',
+												    title: 'Gagal',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  })</script>";
 											}
 										}
 									}
 								}
 								else{
-									echo "Anda tidak berhasil menghapus data<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 							}
 						}

@@ -88,7 +88,7 @@
 						<td style=\"font-size: large;\">".$hasil[$i]['perum']."</td>
 						<td style=\"font-size: large;\">".$hasil[$i]['tag']."</td>";
 				if($hasil[$i]['imageurl'] != ''){
-					$html .= "<td><a href='../../../images/".$hasil[$i]['imageurl']."'  onclick='return hs.expand(this)' class='highslide'><img src='../../../images/".$hasil[$i]['imageurl']."' width=120px height=120px ></a></td>
+					$html .= "<td><a href='../images/".$hasil[$i]['imageurl']."'  onclick='return hs.expand(this)' class='highslide'><img src='../images/".$hasil[$i]['imageurl']."' width=120px height=120px ></a></td>
 					<td>".$hasil[$i]['expdate']."</td>
 					<td>
 						<select id='Aksi".$hasil[$i]['id']."' name='Aksi".$hasil[$i]['id']."' onChange=document.getElementById('Aksi".$hasil[$i]['id']."').name='Aksi';document.getElementById('identitas').value='".$hasil[$i]['id']."';document.getElementById('daftar').submit() >

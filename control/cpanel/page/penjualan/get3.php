@@ -16,7 +16,7 @@
 	if(isset($_POST['start']) && @$_POST['start'] >= 0){
 		$username = $_SESSION['username'];
 		$password = $_SESSION['password'];
-		$query="SELECT Id FROM `user-manager` WHERE Username = ? AND Password = ?";
+		$query="SELECT Id,Perum FROM `user-manager` WHERE Username = ? AND Password = ?";
 		$exquery=$Koneksi->getKonek()->prepare($query);
 		$exquery->bind_param("ss",$username,$password);
 		$exquery->execute();
@@ -26,15 +26,16 @@
 			$tampil=$exquery->get_result()->fetch_all(MYSQLI_ASSOC);
 
 			$iduser = $tampil[0]["Id"];
+			$perum = $tampil[0]["Perum"];
 		}
 
 		$start = $_POST['start'];
 		
-		$tglawal = $_SESSION['tglbefore'];
-		$tglakhir = $_SESSION['tglafter'];
+		$tglawal = $_SESSION['tglbefore2'];
+		$tglakhir = $_SESSION['tglafter2'];
 
-		$tglawal2 = date_create($_SESSION['tglbefore']);
-		$tglakhir2 = date_create($_SESSION['tglafter']);
+		$tglawal2 = date_create($_SESSION['tglbefore2']);
+		$tglakhir2 = date_create($_SESSION['tglafter2']);
 		$diffent = date_diff($tglawal2,$tglakhir2);
 
 		$kueh = "SELECT Id FROM `user-manager` WHERE Username = '".$_SESSION['username']."'";
@@ -70,26 +71,16 @@
 		$modaltotal = 0;
 		if($result){
 			$html = "";
-			$html .= "<div style='overflow-x: scroll;overflow-y: scroll;height: 480px;'>";
+			$html .= "<div style='overflow-x: scroll;overflow-y: scroll;height: 300px;'>";
 			$html .= "<table align=center border=1 id=tabelku class=CSSTableGenerator >
 					<tr>
-						<td style='width:6.5%;'>Id</td>
-						<td style='width:6.5%;'>Tanggal</td>
-						<td style='width:6.5%;'>Pelangan/Kasir</td>
-						<td style='width:6.5%;'>Driver</td>
-						<td style='width:35%;'>Rincian Barang </td>
-						<td style='width:6.5%;'>Alamat</td>
-						<td style='width:6.5%;'>Pembayaran</td>
-						<td style='width:6.5%;'>Status</td>
-						<td style='width:6.5%;'>Restock</td>
-						<td style='width:6.5%;'>Uang Diterima</td>
-						<td style='width:6.5%;'>Aksi</td></tr>
-					";
+						<th style='width:60%;'></th>
+						<th style='width:40%;''></th>
+					</tr>";
 			$hasil=$exquery->get_result()->fetch_all(MYSQLI_ASSOC);
 			for($i=0;$i<count($hasil);$i++){
 				$idorder = $hasil[$i]["id"];
-				$html .= "<tr>
-						<td style=\"font-size: large; font-weight: bold;\">".$hasil[$i]['id']."</td>";
+				$html .= "<tr>";
 				$query3 = "SELECT * FROM `cart` WHERE orderid = ?";
 				$exquery3=$Koneksi->getKonek()->prepare($query3);
 				$exquery3->bind_param("i",$idorder);
@@ -127,7 +118,7 @@
 								$totalmodal += $total_modal;
 								$pendapatan += $total_barang-($total_modal);
 								$omset += $total_barang;
-								$rincianbarang .= $barang_name." - ".$hasil3[$j]["jumlah"]." x ".rupiah($barang_harga)." = ".rupiah($total_barang)."<br>";
+								$rincianbarang .= $barang_name." <br> ".$hasil3[$j]["jumlah"]." x ".rupiah($barang_harga)." <br> ".rupiah($total_barang)."<br><br>";
 							}
 						}
 						else{
@@ -163,7 +154,7 @@
 								$totalmodal += $total_modal;
 								$pendapatan += $total_barang-($total_modal);
 								$omset += $total_barang;
-								$rincianbarang .= $barang_name." - ".$hasil3[$j]["jumlah"]." x ".rupiah($barang_harga)." = ".rupiah($total_barang)."<br>";
+								$rincianbarang .= $barang_name." <br> ".$hasil3[$j]["jumlah"]." x ".rupiah($barang_harga)." <br> ".rupiah($total_barang)."<br><br>";
 							}
 						}
 					}
@@ -179,11 +170,11 @@
 					$pendapatantotal += $pendapatan;
 					$modaltotal += $totalmodal;
 					$omsettotal += $omset;
-					$rincianbarang .= "<br><b style=\"color: coral;\">Biaya Ongkir = ".rupiah($biayaongkir)."<br>";
-					$rincianbarang .= "<b style=\"color: red;\">SubTotal Modal = ".rupiah($totalmodal)."<br>";
-					$rincianbarang .= "<b style=\"color: blue;\">SubTotal Bayar = ".rupiah($totalbayar)."<br>";
-					$rincianbarang .= "<b style=\"color: green;\">Pendapatan = ".rupiah($pendapatan)."<br>";
-					$rincianbarang .= "<b style=\"color: magenta;\">Omset = ".rupiah($omset);
+					$rincianbarang .= "<br><b style=\"color: coral;\">Biaya Ongkir <br> ".rupiah($biayaongkir)."<br><br>";
+					$rincianbarang .= "<b style=\"color: red;\">SubTotal Modal <br> ".rupiah($totalmodal)."<br><br>";
+					$rincianbarang .= "<b style=\"color: blue;\">SubTotal Bayar <br> ".rupiah($totalbayar)."<br><br>";
+					$rincianbarang .= "<b style=\"color: green;\">Pendapatan <br> ".rupiah($pendapatan)."<br><br>";
+					$rincianbarang .= "<b style=\"color: magenta;\">Omset <br> ".rupiah($omset);
 				}
 				if($hasil[$i]["driverid"]==NULL){
 					$driver="";
@@ -208,24 +199,10 @@
 				$uang_diterima = $hasil[$i]["uang_diterima"];
 				$pembayaran = $hasil[$i]["pembayaran"];
 				$tanggalupdate = $hasil[$i]["updateorder"];
-				$html .= "<td style=\"font-size: small; font-weight: bold;\">".$tanggalupdate."</td>";
-				if($nohpuser!="")$html .= "<td style=\"font-size: small; font-weight: bold;\">".$user_id." - ".$user_name."<br><a target='_blank' href='https://wa.me/".$nohpuser."'>$nohpuser</td>";
-				else $html .= "<td style=\"font-size: small; font-weight: bold;\">".$user_id." - ".$user_name."</td>";
-				if($driver!=null)$html .= "<td style=\"font-size: small; font-weight: bold;\">".$driver."<br><a target='_blank' href='https://wa.me/".$nowadriver."'>$nowadriver</td>";
-				else $html .= "<td style=\"font-size: small; font-weight: bold;\">".$driver."</td>";
-				$html .= "<td style=\"font-size: small; font-weight: bold;\">".$rincianbarang."</td>";
-				$html .= "<td style=\"font-size: large; font-weight: bold;\">".$alamat."</td>";
-				$html .= "<td style=\"font-size: large; font-weight: bold;\">".$pembayaran."</td>";
-				if($status=="Dibatalkan")$html .= "<td style=\"font-size: large; font-weight: bold;color: red;\">".$status."</td>";
-				else if($status=="selesai")$html .= "<td style=\"font-size: large; font-weight: bold;color: green;\">".$status."</td>";
-				else $html .= "<td style=\"font-size: large; font-weight: bold;\">".$status."</td>";
-				
-				if($restock=="sudah")$html .= "<td style=\"font-size: large; font-weight: bold;\"><img src=\"page/penjualan/image/checklist.png\" alt=\"Sudah direstock\" width=\"50\" height=\"50\"></td>";
-				else if($restock=="")$html .= "<td style=\"font-size: large; font-weight: bold;\"></td>";
-				
-				if($uang_diterima=="sudah")$html .= "<td style=\"font-size: large; font-weight: bold;\"><img src=\"page/penjualan/image/checklist.png\" alt=\"Sudah diterima\" width=\"50\" height=\"50\"></td>";
-				else if($uang_diterima=="")$html .= "<td style=\"font-size: large; font-weight: bold;\"><img src=\"page/penjualan/image/cross.png\" alt=\"Belum diterima\" width=\"50\" height=\"50\"></td>";
-						
+				$html .= "<td style=\"font-size: small; font-weight: bold;\">
+				".$tanggalupdate."<br><br>
+				".$rincianbarang."
+				</td>";		
 				
 				if($status=="Dibatalkan"){
 					if($restock=="sudah"){
@@ -277,29 +254,21 @@
 			$pendapatantotal -= $total_biaya_penyusutan;
 			$html .= "</table>";
 			$html .= "</div>";
+			$html .= "<div style='overflow-x: scroll;overflow-y: scroll;'>";
 			$html .= "<table align=center border=1 id=tabelku2 class=CSSTableGenerator >";
 			$html .= "<tr>
-						<th style='width:6.5%;'></th>
-						<th style='width:6.5%;''></th>
-						<th style='width:6.5%;'></th>
-						<th style='width:7.25%;'></th>
-						<th style='width:35%;'></th>
-						<th style='width:6.5%;'></th>
-						<th style='width:6.5%;'></th>
-						<th style='width:6.5%;'></th>
-						<th style='width:6.5%;'></th>
-						<th style='width:6.5%;'></th>
-						<th style='width:6.5%;'></th>
+						<th style='width:60%;'></th>
+						<th style='width:40%;''></th>
 					</tr>
 					<tr>
-						<td colspan='4' style=\"text-align:center;font-size: large;\">
+						<td style=\"text-align:left;font-size: small;\">
 						Modal<br>
 						Omset<br>
 						Pendapatan Bersih<br><br>
 						Biaya Penyusutan Aset<br>
 						Pendapatan Bersih Aset
 						</td>
-						<td colspan='7' style=\"text-align:left;font-size: large;\">"
+						<td style=\"text-align:left;font-size: small;\">"
 						.rupiah($modaltotal)."<br>"
 						.rupiah($omsettotal)."<br>"
 						.rupiah($pendapatantotal+$total_biaya_penyusutan)."<br><br>"
@@ -307,6 +276,7 @@
 						.rupiah($pendapatantotal)."</td>
 					</tr>";
 			$html .= "</table>";
+			$html .= "</div'>";
 			echo $html;
 		}
 	}

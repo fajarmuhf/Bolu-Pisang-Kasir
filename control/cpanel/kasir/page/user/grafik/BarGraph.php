@@ -10,7 +10,7 @@
 	$koneksi = new Hubungi();
 	$koneksi->Konek("bolu_pisang");
 	
-	$query = "SELECT * FROM User WHERE 1";
+	$query = "SELECT * FROM Barang WHERE 1";
 	$exquery = mysql_query($query);
 	
 	$sumbux = array();
@@ -21,9 +21,9 @@
 	$i=0;
 	if($exquery){
 		while($hasil = mysql_fetch_array($exquery)){
-			$sumbux[$i] = $hasil['Username'];
-			$sumbuy[$i] = $hasil['Id'];
-			//$sumbuy2[$i] = $hasil['Status'];
+			$sumbux[$i] = $hasil['Nama'];
+			$sumbuy[$i] = $hasil['Harga'];
+			//$sumbuy2[$i] = $hasil['Tahun'];
 			$i++;
 		}
 	//Slice Color
@@ -36,7 +36,7 @@
 	$tampil->SetScale("textint",0,0,0,0);
 	
 	//Membuat Judul dari Grafik
-	$tampil->title->Set('Data Data User');
+	$tampil->title->Set('Data Data Barang');
 	
 	//Menampilkan grid untuk sumbu X
 	$tampil->xgrid->Show();
@@ -55,19 +55,18 @@
 	//Mengeset Slice Color 
 	//$garis->SetSliceColors($colorslice);
 	//Membuat Legend untuk garis
-	$garis->SetLegend('Id');
+	$garis->SetLegend('Harga');
 	
 	//Mengeplot Grafik
-	/*
-	$garis2 = new BarPlot($sumbuy2);
+	//$garis2 = new BarPlot($sumbuy2);
 	//Menambahkan plot ke dalam grafik dengan cara menambahkan object garis ke dalam object tampil
 	//Mengeset warna untuk sumbu y
-	$garis2->SetColor("blue");
+	//$garis2->SetColor("blue");
 	//Mengeset Slice Color 
 	//$garis->SetSliceColors($colorslice);
 	//Membuat Legend untuk garis
-	$garis2->SetLegend('Password');
-	*/
+	//$garis2->SetLegend('Tahun');
+	
 	$tampil->Add($garis);
 	//$tampil->Add($garis2);
 	

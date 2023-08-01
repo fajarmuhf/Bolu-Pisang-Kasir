@@ -101,8 +101,8 @@
 					$tglakhir = date("Y-m-d H:i:s");
 				}
 
-				$_SESSION['tglbefore'] = $tglawal;
-				$_SESSION['tglafter'] = $tglakhir;
+				$_SESSION['tglbefore2'] = $tglawal;
+				$_SESSION['tglafter2'] = $tglakhir;
 								
 				$query = "SELECT * FROM `cart` WHERE usermanagerid = $iduser AND status='belumbayar' ";
 				$exquery = mysqli_query($Koneksi->getKonek(),$query);
@@ -111,18 +111,26 @@
 					echo "<input type=hidden id=identitas name=identitas>";
 					echo "<input type=hidden id=checkstatus name=checkstatus>";
 					echo "
-						<div style='float:left;width:33%;margin-top:15px;'>
-							<input style='border:1px solid blue;border-radius:25px;' type='text' class='tanggal' name='tglbefore' id='tglbefore' onchange='cekTanggal()'><br>
-							$tglawal
-						</div>
-						<div style='float:left;width:33%;'>
+						<div>
 							<h1 class='title'>Data - Data ",ucfirst($namapage)."</h1>
 						</div>
-						<div style='float:left;width:33%;margin-top:15px;'>
-							<input style='border:1px solid blue;border-radius:25px;' type='text' class='tanggal' name='tglafter' id='tglafter' onchange='cekTanggal()'><br>
+					";
+					echo "
+						<div>
+						<div style='float:left;width:50%;margin-top:15px;'>
+							<input style='width:80%;border:1px solid blue;border-radius:25px;' type='text' class='tanggal' name='tglbefore' id='tglbefore' onchange='cekTanggal()' autocomplete='off'><br>
+							$tglawal
+						</div>
+						<div style='float:left;width:50%;margin-top:15px;'>
+							<input style='width:80%;border:1px solid blue;border-radius:25px;' type='text' class='tanggal' name='tglafter' id='tglafter' onchange='cekTanggal()' autocomplete='off'><br>
 							$tglakhir
+						</div>
+						<div style='clear:both;'>
 						</div>";
-					echo "<div style='clear:both;'><div id='tabels'>";
+					echo "<ul id='buttongrafik'>";
+					echo "<li  style=\"width:40%;background-color:#443AD8;border-radius:30px;\" class=\"geser\"><a href=\"?page=penjualan&i=grafik\">Grafik</a></li>";
+					echo "</ul>";
+					echo "<div id='tabels'>";
 					
 					
 					echo "</div>";
@@ -181,6 +189,14 @@
 						data:'start='+load_flag+'&key='+key,
 						type:'post',
 						success:function(result){
+							console.log(result);
+							console.log(result.includes("Aksi</td></tr></table>") );
+							if(result.includes("Aksi</td></tr></table>")){
+								jQuery('#buttongrafik').hide();
+							}
+							else{
+								jQuery('#buttongrafik').show();
+							}
 							jQuery('#tabels').append(result);
 							load_flag+=5;
 							lagiloading=false;

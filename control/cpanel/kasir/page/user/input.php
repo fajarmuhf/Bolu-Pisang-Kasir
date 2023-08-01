@@ -1,48 +1,79 @@
-		<form action="?page=user&i=input&kirim=1" method="post">
+		<?php
+			include "page/secure.php";
+		?>
+		<form action="?page=user&i=input&kirim=1" method="post" enctype="multipart/form-data">
 			<table align=center class=Login>
 			<tr>
-				<td colspan=2>Input</td>
+				<td colspan=2>Ganti Password</td>
 			</tr>
 			<tr>
-				<td>Username : </td><td><input type="text" name="username" id="username"></td>
+				<td>Password Baru : </td><td><input type="password" name="password" id="password"></td>
 			</tr>
 			<tr>
-				<td>Password : </td><td><input type="text" name="password" id="password"></td>
-			</tr>
-			<tr>
-				<td>Status : </td><td><input type="text" name="status" id="status"></td>
-			</tr>
-			<tr>
-				<td colspan=2><button class="button"> Tambah </button></td>
+				<td colspan=2><button class="button"> Ubah </button></td>
 			</tr>
 			</table>
 			<?php
-				include "include/koneksi.php";
 				include "include/user.php";
-			
+				
 				if(@$_GET["kirim"] == 1){
-					if(@$_POST["username"] != "" && @$_POST["password"] != "" && @$_POST["status"] != ""){
-						$Koneksi = new Hubungi();
-						$Koneksi->Konek("bolu_pisang");
-								
-						$username = $_POST["username"];
-						$password = $_POST["password"];
-						$status = $_POST["status"];
-								
-						$ob1 = new User();
-						$ob1->setUsername($username);
-						$ob1->setPassword($password);
-						$ob1->setStatus($status);
-								
-						$query = "INSERT INTO `User` SELECT (COUNT(*)+1),'".$ob1->getUsername()."','".$ob1->getPassword()."','".$ob1->getStatus()."' FROM `User` WHERE (SELECT COUNT(*) From User WHERE UPPER(Username) = UPPER('".$ob1->getUsername()."')) = 0  ";
-						$exquery = mysqli_query($Koneksi->getKonek(),$query);
+					if(@$_POST["password"] != ""){
+						$username = $_SESSION['username'];
+						$password = $_SESSION["password"];
+						$pass = md5($_POST["password"]);
+
+						$query="SELECT Id FROM `user-manager` WHERE Username = ? AND Password = ?";
+						$Koneksi->Konek("fandystore");
+
+						$exquery=$Koneksi->getKonek()->prepare($query);
+						$exquery->bind_param("ss",$username,$password);
+						$exquery->execute();
+						
 						if($exquery){
-							echo "Anda telah berhasil menginput data<br>";
+							$tampil=$exquery->get_result()->fetch_all(MYSQLI_ASSOC);
+
+							$iduser = $tampil[0]["Id"];
+						}
+
+						$query = "UPDATE `user-manager` SET Password = ? WHERE Id = ?";
+						$exquery=$Koneksi->getKonek()->prepare($query);
+						$exquery->bind_param("ss",$pass,$iduser);
+						$result = $exquery->execute();
+						if($result){
+							echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'success',
+								    title: 'Sukses',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 						}
 						else{
-							echo "Anda tidak berhasil menginput data<br>";
+							echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 						}
-						mysql_close($Koneksi->getKonek());
+						 
+									
+						mysqli_close($Koneksi->getKonek());
 					}
 				}
 			?>

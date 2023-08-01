@@ -68,13 +68,13 @@
 							$barangbaru->setHarga($harga);
 							$barangbaru->setGambar($gambar);
 								
-							 if (file_exists("../../../images/" . $_FILES["gambar"]["name"]))
+							 if (file_exists("../images/" . $_FILES["gambar"]["name"]))
 							 {
 								echo $barangbaru->getGambar() . " already exists. ";
 							 }
 							 else
 							 {
-								move_uploaded_file($_FILES["gambar"]["tmp_name"],"../../../images/" . $barangbaru->getGambar());							
+								move_uploaded_file($_FILES["gambar"]["tmp_name"],"../images/" . $barangbaru->getGambar());							
 								$query = "INSERT INTO `produk` SELECT (COUNT(*)+1),?,?,?,?,?,?,?,?,0,?,?,? FROM `produk` WHERE 1 ";
 								$exquery=$Koneksi->getKonek()->prepare($query);
 								$exquery->bind_param("ssisiisssss",$nama,$deskripsi,$stok,$satuan,$modal,$harga,$perum,$tag,$gambar,$expire,$barcode);

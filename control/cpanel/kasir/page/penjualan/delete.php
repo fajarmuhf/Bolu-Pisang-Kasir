@@ -20,13 +20,12 @@
 				
 				if(@$_GET["kirim"] == 1){
 					if(@$_POST["atribut"] != "" && @$_POST["nilai"] != ""){
-						$Koneksi = new Hubungi();
 						$Koneksi->Konek("fandystore");
 								
 						$atribut = $_POST["atribut"];
 						$nilai = $_POST["nilai"];
 								
-						$kueh = "SELECT *,COUNT(*) FROM produk WHERE id = ?";
+						$kueh = "SELECT *,COUNT(*) FROM cart WHERE id = ?";
 						$exquery=$Koneksi->getKonek()->prepare($kueh);
 						$exquery->bind_param("i",$nilai);
 						$exkueh = $exquery->execute();
@@ -51,27 +50,116 @@
 											$exquery3 = $exquery32->execute();
 											if($exquery3){
 												$totalid = $hasil[0]["COUNT(*)"]+1;
-												$query4 = "ALTER TABLE cart AUTO_INCREMENT=1";
-												$exquery42=$Koneksi->getKonek()->prepare($query4);
-												$exquery4 = $exquery42->execute();
+												$reset = "ALTER TABLE cart AUTO_INCREMENT = $totalid";
+												$exquery4 = $Koneksi->getKonek()->query($reset);
 												if($exquery4){
-													echo "Anda telah berhasil menghapus data<br>";
+													echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'success',
+												    title: 'Sukses',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  }).then(() => {
+													   window.location = 'kasir.php?page=penjualan';
+												  })</script>";
 												}
 												else{
-													echo "Anda tidak berhasil menghapus data<br>";
+													echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'error',
+												    title: 'Gagal',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  })</script>";
 												}
 											}
 											else{
-												echo "Anda tidak berhasil menghapus data<br>";
+												echo "<script>Swal.fire({
+											    toast: true,
+											    icon: 'error',
+											    title: 'Gagal',
+											    animation: false,
+											    position: 'bottom',
+											    showConfirmButton: false,
+											    timer: 3000,
+											    timerProgressBar: true,
+											    didOpen: (toast) => {
+											      toast.addEventListener('mouseenter', Swal.stopTimer)
+											      toast.addEventListener('mouseleave', Swal.resumeTimer)
+											    }
+											  })</script>";
 											}
 										}
 										else{
-											echo "Anda telah berhasil menghapus data<br>";
+											$totalid = $hasil[0]["COUNT(*)"]+1;
+											$reset = "ALTER TABLE cart AUTO_INCREMENT = $totalid";
+											$exquery4 = $Koneksi->getKonek()->query($reset);
+											if($exquery4){
+												echo "<script>Swal.fire({
+											    toast: true,
+											    icon: 'success',
+											    title: 'Sukses',
+											    animation: false,
+											    position: 'bottom',
+											    showConfirmButton: false,
+											    timer: 3000,
+											    timerProgressBar: true,
+											    didOpen: (toast) => {
+											      toast.addEventListener('mouseenter', Swal.stopTimer)
+											      toast.addEventListener('mouseleave', Swal.resumeTimer)
+											    }
+											  }).then(() => {
+												   window.location = 'kasir.php?page=penjualan';
+											  })</script>";
+											}
+											else{
+												echo "<script>Swal.fire({
+												    toast: true,
+												    icon: 'error',
+												    title: 'Gagal',
+												    animation: false,
+												    position: 'bottom',
+												    showConfirmButton: false,
+												    timer: 3000,
+												    timerProgressBar: true,
+												    didOpen: (toast) => {
+												      toast.addEventListener('mouseenter', Swal.stopTimer)
+												      toast.addEventListener('mouseleave', Swal.resumeTimer)
+												    }
+												  })</script>";
+											}
 										}
 									}
 								}
 								else{
-									echo "Anda tidak berhasil menghapus data<br>";
+									echo "<script>Swal.fire({
+								    toast: true,
+								    icon: 'error',
+								    title: 'Gagal',
+								    animation: false,
+								    position: 'bottom',
+								    showConfirmButton: false,
+								    timer: 3000,
+								    timerProgressBar: true,
+								    didOpen: (toast) => {
+								      toast.addEventListener('mouseenter', Swal.stopTimer)
+								      toast.addEventListener('mouseleave', Swal.resumeTimer)
+								    }
+								  })</script>";
 								}
 							}
 						}

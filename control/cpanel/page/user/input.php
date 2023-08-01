@@ -52,7 +52,7 @@
 							$status = $_POST["status"];
 							$perum = $_POST["perum"];
 								
-							$query = "INSERT INTO `user-manager` SELECT (COUNT(*)+1),?,?,?,? FROM `user-manager` WHERE 1 ";
+							$query = "INSERT INTO `user-manager` SELECT (COUNT(*)+1),?,?,?,?,'','','' FROM `user-manager` WHERE 1 ";
 							$exquery=$Koneksi->getKonek()->prepare($query);
 							$exquery->bind_param("ssss",$username,$password,$status,$perum);
 							$result = $exquery->execute();
